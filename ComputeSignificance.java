@@ -193,7 +193,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
-		file_out_lambda=args[0]+"jw_LambdaContext.txt"
+		file_out_lambda=args[0]+"jw_LambdaContext.txt";
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
