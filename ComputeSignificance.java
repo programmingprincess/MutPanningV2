@@ -393,9 +393,9 @@ public class ComputeSignificance {
 			for (int i=0;i<no_clusters;i++){
 				output.write(i+"");
 				for (int j=0;j<lambda_context.size();j++){
-					for (int k=0;k<lambda_context[j].size();k++){
-						for (int l=0;l<lambda_context[j][k].size();l++){
-							output.write("	"+lambda_context[j][k][l]);
+					for (int k=0;k<lambda_context.get(j).size();k++){
+						for (int l=0;l<lambda_context.get(j).get(k).size();l++){
+							output.write("	"+lambda_context.get(j).get(k).get(l));
 						}
 					}
 				}
@@ -998,8 +998,8 @@ public class ComputeSignificance {
 					
 				}
 			
-				FileWriter out=new FileWriter(file_out+entities[k]+".txt");
-				BufferedWriter output= new BufferedWriter(out);
+				out=new FileWriter(file_out+entities[k]+".txt");
+				output= new BufferedWriter(out);
 				//SignVector	SignCount	
 				//output.write("Name	TargetSize	TargetSizeSyn	Count	CountSyn	SignVectorSyn	SignCumSyn	SignCompleteSyn	SignSeq	SignDm	SignCum	SignCombined	FDRSyn	FDR");
 				output.write("Name	TargetSize	TargetSizeSyn	Count	CountSyn	SignificanceSyn	FDRSyn	Significance	FDR");
