@@ -237,6 +237,7 @@ public class ComputeSignificance {
 			input= new BufferedReader(new InputStreamReader(inn));
 			input.readLine();
 			String s="";
+			
 			while((s=input.readLine())!=null){
 				String[] t=s.split("	");
 				int[][][] a =new int [20][6][4];
@@ -263,7 +264,7 @@ public class ComputeSignificance {
 				lambda_t[0]=new double[]{2*(double)(b[0]+b[1]+b[2])/(double)(sum),2*(double)(b[3]+b[4]+b[5])/(double)(sum)};
 				lambda_t[1]=new double[]{3*(double)(b[0]+b[3])/(double)(sum),3*(double)(b[1]+b[5])/(double)(sum),3*(double)(b[2]+b[4])/(double)(sum)};
 				lambda_type.add(lambda_t);
-			}
+			} // end of while 
 			input.close();
 			
 			
@@ -390,12 +391,12 @@ public class ComputeSignificance {
 			output.newLine();
 
 			ArrayList<int[][][]> cluster_affinity=new ArrayList<int[][][]>();
-			for (int i=0;i<no_clusters;i++){
+			for (int i=0;i<lambda_context.size();i++){
 				output.write(i+"");
-				for (int j=0;j<lambda_context.size();j++){
-					for (int k=0;k<lambda_context.get(j).length;k++){
-						for (int l=0;l<lambda_context.get(j)[k].length;l++){
-							output.write("	"+lambda_context.get(j)[k][l]);
+				for (int j=0;j<lambda_context.get(i).length;j++){
+					for (int k=0;k<lambda_context.get(i)[j].length;k++){
+						for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
+							output.write("	"+lambda_context.get(i)[j][k][l]);
 						}
 					}
 				}
