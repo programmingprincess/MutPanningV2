@@ -301,8 +301,10 @@ public class ComputeSignificance {
 					}
 				}
 				System.out.println("LOLOLOL\n\n\n\n (ll)");
-				System.out.println(ll);
+				System.out.println("printing lambda_context size now");
+				System.out.println(lambda_context.size());
 				lambda_context.add(ll);
+				System.out.println(Arrays.deepToString(ll));
 			}
 			
 			int[] ttt={0,1,2,0,2,1};
