@@ -393,9 +393,9 @@ public class ComputeSignificance {
 			for (int i=0;i<no_clusters;i++){
 				output.write(i+"");
 				for (int j=0;j<lambda_context.size();j++){
-					for (int k=0;k<lambda_context.get(j).size();k++){
-						for (int l=0;l<lambda_context.get(j).get(k).size();l++){
-							output.write("	"+lambda_context.get(j).get(k).get(l));
+					for (int k=0;k<lambda_context.get(j).length;k++){
+						for (int l=0;l<lambda_context.get(j)[k].length;l++){
+							output.write("	"+lambda_context.get(j)[k][l]);
 						}
 					}
 				}
