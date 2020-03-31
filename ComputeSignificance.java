@@ -193,7 +193,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
-		file_out_lambda=args[0]+"jw_LambdaContext.txt"
+		file_out_lambda=args[0]+"jw_LambdaContext.txt";
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
@@ -309,159 +309,12 @@ public class ComputeSignificance {
 			}
 
 
-			// jiaqi added
-
-			out=new FileWriter(file_out_lambda);
-			output= new BufferedWriter(out);
-			output.write("ClusterID");
-			for (int i=0;i<20;i++){
-				for (int j=0;j<6;j++){
-					for (int k=0;k<4;k++){
-						int p=0;
-						if(i<10){
-							p=i-10;
-						}
-						else{
-							p=i-9;
-						}
-						output.write("	Position_"+p+"_Type_"+(j+1)+"_"+new String[]{"A","C","G","T"}[k]);
-					}
-				}
-			}
-			output.newLine();
-
-			ArrayList<int[][][]> cluster_affinity=new ArrayList<int[][][]>();
-			for (int i=0;i<clusters.size();i++){
-				output.write(i+"");
-				for (int j=0;j<lambda_context.length;j++){
-					for (int k=0;k<lambda_context[j].length;k++){
-						for (int l=0;l<lambda_context[j][k].length;l++){
-							output.write("	"+lambda_context[j][k][l]);
-						}
-					}
-				}
-				output.newLine();
-			}
-			output.close();
-
-
 			
 			int[] ttt={0,1,2,0,2,1};
 			
-//			lambda_context_product1=new double[lambda_context.size()][6][4][4][4][4][4];
-//			lambda_context_product2=new double[lambda_context.size()][6][4][4][4][4][4];
-//			lambda_context_product3=new double[lambda_context.size()][6][4][4][4][4][4];
-//			lambda_context_product4=new double[lambda_context.size()][6][4][4][4][4][4];
-			
-			
-			
-			
-			
-			/*
-			double[][][] lambda_context_product6=new double[lambda_context.size()][6][(int)(Math.pow(4,10))];
-				//System.out.println(a+"/"+lambda_context.size());
-				for (int k=0;k<6;k++){
-					int[] x=new int[10];
-					for (x[0]=0;x[0]<4;x[0]++){
-						//System.out.println(x[0]);
-						for (x[1]=0;x[1]<4;x[1]++){
-							for (x[2]=0;x[2]<4;x[2]++){
-								for (x[3]=0;x[3]<4;x[3]++){
-									for (x[4]=0;x[4]<4;x[4]++){
-										for (x[5]=0;x[5]<4;x[5]++){
-											for (x[6]=0;x[6]<4;x[6]++){
-												for (x[7]=0;x[7]<4;x[7]++){
-													for (x[8]=0;x[8]<4;x[8]++){
-														for (x[9]=0;x[9]<4;x[9]++){
-															int len=0;
-															int n=1;
-															for (int l=0;l<x.length;l++){
-																len+=x[l]*n;
-																n*=4;
-															}
-															for (int a=0;a<lambda_context.size();a++){
-																double prod=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
-																for (int l=0;l<x.length;l++){
-																	prod*=lambda_context.get(a)[l+5][k][x[l]];	
-																}
-																lambda_context_product6[a][k][len]=prod;
-																System.out.println(lambda_context_product6[a][k][len]+"	"+lambda_context_product6X[a][k][len]);
-															}
-														
-														}
-													}
-												}
-											}
-										}
-										
-								
-									}
-								}
-							}
-						}
-					}
-				}
-				
-			
-			*/
 			
 			
 			System.out.println(System.currentTimeMillis());
-			
-			/*
-			for (int a=0;a<lambda_context.size();a++){
-				
-				for (int k=0;k<6;k++){
-					int[] x=new int[5];
-					for (x[0]=0;x[0]<4;x[0]++){
-						for (x[1]=0;x[1]<4;x[1]++){
-							for (x[2]=0;x[2]<4;x[2]++){
-								for (x[3]=0;x[3]<4;x[3]++){
-									for (x[4]=0;x[4]<4;x[4]++){
-										
-										
-										
-										lambda_context_product1[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
-										lambda_context_product2[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]=1;
-										lambda_context_product3[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]=1;
-										lambda_context_product4[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]=1;
-										
-										for (int l=0;l<x.length;l++){
-											lambda_context_product1[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]*=lambda_context.get(a)[l][k][x[l]];
-											lambda_context_product2[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]*=lambda_context.get(a)[l+5][k][x[l]];
-											lambda_context_product3[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]*=lambda_context.get(a)[l+10][k][x[l]];
-											lambda_context_product4[a][k][x[0]][x[1]][x[2]][x[3]][x[4]]*=lambda_context.get(a)[l+15][k][x[l]];
-										}
-
-										
-									}
-								}
-							}
-						}
-					}
-				}
-				
-			}*/
-			
-			
-			/*
-			in=new FileInputStream(file_samples);
-			inn=new DataInputStream(in);
-			input= new BufferedReader(new InputStreamReader(inn));
-			int[] index_header=index_header(input.readLine().split("	"),index_header_samples);
-			ArrayList<String> aa =new ArrayList<String>();
-			while((s=input.readLine())!=null){
-				String e=s.split("	")[index_header[2]];
-				if(!contains(e,aa)){
-					aa.add(e);
-				}
-			}
-			input.close();
-			Collections.sort(aa);
-			entities=new String[aa.size()];
-			for (int i=0;i<aa.size();i++){
-				entities[i]=aa.get(i);
-			}*/
 			
 			ArrayList<String> names_count=new ArrayList<String>(); 
 			ArrayList<Integer> count=new ArrayList<Integer>();
@@ -513,6 +366,43 @@ public class ComputeSignificance {
 				weights[weights.length-1][cluster]+=c;
 			}
 			input.close();
+
+
+			// jiaqi added
+
+			FileWriter out=new FileWriter(file_out_lambda);
+			BufferedWriter output= new BufferedWriter(out);
+			output.write("ClusterID");
+			for (int i=0;i<20;i++){
+				for (int j=0;j<6;j++){
+					for (int k=0;k<4;k++){
+						int p=0;
+						if(i<10){
+							p=i-10;
+						}
+						else{
+							p=i-9;
+						}
+						output.write("	Position_"+p+"_Type_"+(j+1)+"_"+new String[]{"A","C","G","T"}[k]);
+					}
+				}
+			}
+			output.newLine();
+
+			ArrayList<int[][][]> cluster_affinity=new ArrayList<int[][][]>();
+			for (int i=0;i<no_clusters;i++){
+				output.write(i+"");
+				for (int j=0;j<lambda_context.size();j++){
+					for (int k=0;k<lambda_context[j].size();k++){
+						for (int l=0;l<lambda_context[j][k].size();l++){
+							output.write("	"+lambda_context[j][k][l]);
+						}
+					}
+				}
+				output.newLine();
+			}
+			output.close();
+
 			
 			
 			//normalize weights. weight <0.01 are set to 0
