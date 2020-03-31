@@ -89,6 +89,8 @@ public class ComputeSignificance {
 	//static String file_out2="";
 	static String file_count_genes="";
 	static String file_table_bessel="";
+
+	static String file_out_lambda="";
 	
 	static double[][] weights=null;
 	static ArrayList<Integer>[] weights_index=null;
@@ -191,6 +193,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
+		file_out_lambda=args[0]+"jw_LambdaContext.txt"
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
@@ -304,6 +307,44 @@ public class ComputeSignificance {
 				System.out.println(ll);
 				lambda_context.add(ll);
 			}
+
+
+			// jiaqi added
+
+			out=new FileWriter(file_out_lambda);
+			output= new BufferedWriter(out);
+			output.write("ClusterID");
+			for (int i=0;i<20;i++){
+				for (int j=0;j<6;j++){
+					for (int k=0;k<4;k++){
+						int p=0;
+						if(i<10){
+							p=i-10;
+						}
+						else{
+							p=i-9;
+						}
+						output.write("	Position_"+p+"_Type_"+(j+1)+"_"+new String[]{"A","C","G","T"}[k]);
+					}
+				}
+			}
+			output.newLine();
+
+			ArrayList<int[][][]> cluster_affinity=new ArrayList<int[][][]>();
+			for (int i=0;i<clusters.size();i++){
+				output.write(i+"");
+				for (int j=0;j<lambda_context.length;j++){
+					for (int k=0;k<lambda_context[j].length;k++){
+						for (int l=0;l<lambda_context[j][k].length;l++){
+							output.write("	"+lambda_context[j][k][l]);
+						}
+					}
+				}
+				output.newLine();
+			}
+			output.close();
+
+
 			
 			int[] ttt={0,1,2,0,2,1};
 			
