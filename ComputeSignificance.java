@@ -264,6 +264,8 @@ public class ComputeSignificance {
 				lambda_t[0]=new double[]{2*(double)(b[0]+b[1]+b[2])/(double)(sum),2*(double)(b[3]+b[4]+b[5])/(double)(sum)};
 				lambda_t[1]=new double[]{3*(double)(b[0]+b[3])/(double)(sum),3*(double)(b[1]+b[5])/(double)(sum),3*(double)(b[2]+b[4])/(double)(sum)};
 				lambda_type.add(lambda_t);
+				System.out.println("\n\n\n LULULULULULULUL");
+				System.out.println(Arrays.deepToString(lambda_type));
 			} // end of while 
 			input.close();
 			
@@ -516,18 +518,6 @@ public class ComputeSignificance {
 			}
 			
 			
-			/*for (int i=0;i<genes.length;i++){
-				for (int j=genes[i].size()-1;j>=0;j--){
-					if(genes[i].get(j).name.length()>2&&genes[i].get(j).name.substring(0, 2).equals("OR")&&contains(genes[i].get(j).name.substring(2,3),numbers)){//&&genes[i].get(j).ell_s>0.0
-						genes[i].remove(j);
-					}
-				}
-			}*/
-			//for (int i=1;i<genes.length;i++){
-			//	genes[i]=new ArrayList<Gene>();
-			//}
-			
-			
 			Hashtable<String,int[]> table_gene=new Hashtable<String,int[]>();
 			Hashtable<String,Integer>[] table_gene2=new Hashtable[chr.length];
 			for (int i=0;i<chr.length;i++){
@@ -542,10 +532,6 @@ public class ComputeSignificance {
 			
 			
 			table_entity=new Hashtable<Integer,Integer>();
-			//list=new ArrayList[entities.length];
-			//for (int i=0;i<list.length;i++){
-			//	list[i]=new ArrayList<Integer>();
-			//}
 			
 			in=new FileInputStream(file_samples);
 			inn=new DataInputStream(in);
@@ -653,36 +639,6 @@ public class ComputeSignificance {
 //				}
 //				System.out.println();
 			}
-			//System.exit(0);
-			
-			/*
-			for (int i=0;i<weights.length;i++){
-				for (int j=0;j<weights[i].length;j++){
-					System.out.print("	"+weights[i][j]);
-				}
-				System.out.println();
-			}
-			System.exit(0);*/
-			
-			//for (int i=0;i<chr.length;i++){
-			//	run(i);
-			//}
-			
-			/*
-			for (int i=0;i<lambda_context.size();i++){
-				for (int j=0;j<lambda_context.get(i).length;j++){
-					for (int k=0;k<lambda_context.get(i)[j].length;k++){
-						for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
-							System.out.print("	"+lambda_context.get(i)[j][k][l]);
-						}
-						
-					}
-				}
-				System.out.println();
-			}
-			System.exit(0);
-			*/
-			//iii=index("Skin",entities);
 			
 			
 			non_syn_count=new int[entities.length];
@@ -1101,52 +1057,7 @@ public class ComputeSignificance {
 		
 		//BufferedWriter output=null;
 		public static void run(int c){
-			
-//			for (int nn=0;nn<genes[c].size();nn++){
-//				System.out.println(nn+"	"+genes[c].get(nn).start+"	"+genes[c].get(nn).end);
-//			}
-//			System.exit(0);
-			//int center=50;
-			/*
-			for (int i=0;i<lambda_type.size();i++){
-				for (int j=0;j<lambda_type.get(i).length;j++){
-					for (int k=0;k<lambda_type.get(i)[j].length;k++){
-						lambda_type.get(i)[j][k]=(double)((int)(1000*lambda_type.get(i)[j][k]))/1000.0;
-						
-					}
-				}
-			}
-			
-			for (int i=0;i<lambda_context.size();i++){
-				for (int j=0;j<lambda_context.get(i).length;j++){
-					for (int k=0;k<lambda_context.get(i)[j].length;k++){
-						for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
-							lambda_context.get(i)[j][k][l]=(double)((int)(1000*lambda_context.get(i)[j][k][l]))/1000.0;
-						}
-					}
-				}
-			}*/
-			/*
-			int n1=0;
-			int n2=0;
-			for (int i=0;i<lambda_context.size();i++){
-				for (int j=0;j<lambda_context.get(i).length;j++){
-					for (int k=0;k<lambda_context.get(i)[j].length;k++){
-						for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
-							double x=Math.max(1.0/lambda_context.get(i)[j][k][l], lambda_context.get(i)[j][k][l]);
-							if(x>=1.1){
-								n1++;
-							}
-							else{
-								n2++;
-							}
-						}
-					}
-				}
-			}
-			System.out.println(n1+"	"+n2);
-			*/
-			
+
 			
 			pos=new ArrayList<Integer>();
 			nucl=new ArrayList<String>();
@@ -1386,11 +1297,6 @@ public class ComputeSignificance {
 						}
 					}
 
-					System.out.println("LOLOLOLOLOL \n\n\nlambda2");
-					System.out.println(lambda2.size());
-					System.out.println(Arrays.toString(lambda2.get(0)));
-					
-					
 					boolean is_or=false;
 					if(genes[c].get(nn).name.length()>2&&genes[c].get(nn).name.substring(0, 2).equals("OR")&&contains(genes[c].get(nn).name.substring(2,3),numbers)){//&&genes[i].get(j).ell_s>0.0
 						is_or=true;
