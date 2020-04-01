@@ -1388,7 +1388,7 @@ public class ComputeSignificance {
 
 					System.out.println("LOLOLOLOLOL \n\n\nlambda2");
 					System.out.println(lambda2.size());
-					System.out.println(lambda2.get(0));
+					System.out.println(Arrays.toString(lambda2.get(0)));
 					
 					
 					boolean is_or=false;
