@@ -111,7 +111,7 @@ public class MutPanning {
 		reindex_samples(args[2],args[0]+"SamplesCompleteReindex.txt");
 		args[2]=args[0]+"SamplesCompleteReindex.txt";
 		
-		
+		/*
 		System.out.println("Aligning Maf to Hg19");// - "+chr[i]);
 		//System.out.println(System.currentTimeMillis());
 		AlignHG19.main(new String[]{args[0],args[1],args[2],args[3]});//,chr[i]});
@@ -153,6 +153,8 @@ public class MutPanning {
 		System.out.println("Execute the parameter estimation for CBASE");
 		//System.out.println(System.currentTimeMillis());
 		CBASE_Solutions.main(new String[]{args[0],args[2]});
+
+		*/
 		
 		String[] entities=entities(args[2]);
 		boolean[] compute_uniform=new boolean[entities.length];
@@ -182,7 +184,7 @@ public class MutPanning {
 		
 		
 		
-		
+		/*
 		System.out.println("Start Filtering of significant genes");
 		System.out.println("Filtering Step 1 - Preparing Blat Queries");
 		//System.out.println(System.currentTimeMillis());
@@ -224,7 +226,7 @@ public class MutPanning {
 		System.out.println("Filtering Step 3 - Filtering out Genes");
 		//System.out.println(System.currentTimeMillis());
 		Filter_Step3.main(new String[]{args[0],args[2],args[3]},entities,compute_uniform);
-		
+		*/
 	
 	}
 	

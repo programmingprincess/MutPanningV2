@@ -1055,48 +1055,6 @@ public class ComputeSignificance {
 				}
 			}
 			
-			
-			//for FDR correction put all genes in 1 list and sort them by sign (both for syn sign and non syn sign)
-//			ArrayList<Gene> genes_all=new ArrayList<Gene>();
-//			for (int i=0;i<genes.length;i++){
-//				genes_all.addAll(genes[i]);
-//			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/*
-			int NN=0;
-			for (int i=0;i<genes_all.size();i++){
-				if(genes_all.get(i).count_syn+genes_all.get(i).count+genes_all.get(i).count_all+genes_all.get(i).count_destruct>0){
-					NN++;
-				}
-			}*/
-			
-			
-			
-			//output of FDR values and 
-			
-			
-			
-				
-				
-			/*
-			run(index("1",chr));
-			System.out.println("END");
-			int ii=index("Skin",entities);
-//			
-			for (int i=0;i<pos2.size();i++){
-				System.out.println(pos2.get(i)+"	"+nucl2.get(i)+"	"+coverage2.get(i)+"	"+label2.get(i)[0]+";"+label2.get(i)[1]+";"+label2.get(i)[2]+"	"+lambda2.get(i)[ii][0]+";"+lambda2.get(i)[ii][1]+";"+lambda2.get(i)[ii][2]+"	"+count2.get(i)[ii][0]+";"+count2.get(i)[ii][1]+";"+count2.get(i)[ii][2]);
-			}
-			*/
-			
-			
 		}
 		catch(Exception e){
 			StackTraceElement[] aa=e.getStackTrace();
@@ -1348,24 +1306,6 @@ public class ComputeSignificance {
 						if(pos.size()>100){
 							//update_10_10();
 							update_10_10();
-							/*
-							lambda2.add(new double[weights.length][3]);
-							pos2.add(pos.get(50));
-							nucl2.add(nucl.get(50));
-							coverage2.add(coverage.get(50));
-							label2.add(label.get(50));
-							count2.add(count.get(50));
-							amino_acid2.add(amino_acid.get(50));
-							*/
-							
-							
-							/*
-							System.out.print(pos2.get(pos2.size()-1)+"	"+nucl2.get(nucl2.size()-1)+"	"+coverage2.get(coverage2.size()-1));
-							for (int j=0;j<3;j++){
-								System.out.print("	"+lambda2.get(lambda2.size()-1)[iii][j]);
-							}
-							System.out.println();
-							*/
 							
 							pos.remove(0);
 							nucl.remove(0);
@@ -1436,19 +1376,20 @@ public class ComputeSignificance {
 							for (int j=0;j<3;j++){
 								if(label2.get(i)[j]!=0){
 									index_gene2.add(new int[]{i,j});
-									//lambda_gene.add(lambda2.get(i)[k][j]);
-									//count_gene.add(count2.get(i)[k][j]);
 								}
 								else{
 									index_gene_syn2.add(new int[]{i,j});
-									//lambda_gene_syn.add(lambda2.get(i)[k][j]);
-									//count_gene_syn.add(count2.get(i)[k][j]);
 								}
 							}
 							
 							
 						}
 					}
+
+					System.out.println("LOLOLOLOLOL \n\n\nlambda2");
+					System.out.println(lambda2.size());
+					System.out.println(lambda2.get(0));
+					
 					
 					boolean is_or=false;
 					if(genes[c].get(nn).name.length()>2&&genes[c].get(nn).name.substring(0, 2).equals("OR")&&contains(genes[c].get(nn).name.substring(2,3),numbers)){//&&genes[i].get(j).ell_s>0.0
@@ -1456,180 +1397,7 @@ public class ComputeSignificance {
 					}
 						
 					for (int k=0;k<entities.length;k++){
-//						ArrayList<double[]> lambda22=new ArrayList<double[]>();
-//						for (int i=0;i<pos2.size();i++){
-//							if(lambda2.get(i).length==1){
-//								int iii=(int)(lambda2.get(i)[0][0]);
-//								if(nucl2.get(i).equals("C")||nucl2.get(i).equals("G")){
-//									lambda22.add(new double[]{lambda_context_product6_weight[k][tt2[0]][iii],lambda_context_product6_weight[k][tt2[1]][iii],lambda_context_product6_weight[k][tt2[2]][iii]});
-//								}
-//								else {
-//									lambda22.add(new double[]{lambda_context_product6_weight[k][tt1[0]][iii],lambda_context_product6_weight[k][tt1[1]][iii],lambda_context_product6_weight[k][tt1[2]][iii]});
-//								}
-//							}
-//							else{
-//								lambda22.add(lambda2.get(i)[k]);
-//							}
-//						}
-						
-						
-						//if(!entities[k].equals("Skin")){
-						//	continue;
-						//}
-						//System.out.println(k+"	"+entities[k]);
-						//todo: does this include pan-cancer? if so, remove...
-						//if(!sign_entities[k]&&!sign_uniform_entities[k]){//TODO: select whether or not you want to compute sign or sign uniform
-						//	continue;
-						//}
-						
-						//ArrayList<Double> lambda_gene=new ArrayList<Double>();
-						//ArrayList<Integer> count_gene=new ArrayList<Integer>();
-						//ArrayList<Double> coverage_gene=new ArrayList<Double>();
-						//ArrayList<Double> lambda_gene_syn=new ArrayList<Double>();
-						//ArrayList<Integer> count_gene_syn=new ArrayList<Integer>();
-						//ArrayList<Double> coverage_gene_syn=new ArrayList<Double>();
-						//ArrayList<double[]> pos_gene=new ArrayList<double[]>();
-						//ArrayList<double[]> pos_gene_syn=new ArrayList<double[]>();
-						//ArrayList<String> aa_gene=new ArrayList<String>();
-						//ArrayList<String> aa_gene_syn=new ArrayList<String>();
-						
-//						for (int i=0;i<pos2.size();i++){
-//							if(!genes[c].get(nn).contains(pos2.get(i))){
-//								continue;
-//							}
-//							if(lambda2.get(i).length==1){
-//								int iii=(int)(lambda2.get(i)[0][0]);
-//								//System.out.println(lambda2.get(i)[0][0]+"	"+iii);
-//								
-//								
-////								if(entities[k].equals("Skin")){
-////									if(nucl2.get(i).equals("C")||nucl2.get(i).equals("G")){
-////										System.out.print(pos2.get(i)+"	"+nucl2.get(i));
-////										for (int j=0;j<3;j++){
-////											System.out.print("	"+lambda_context_product6_weight[k][tt2[j]][iii]);
-////										}
-////										for (int j=0;j<3;j++){
-////											System.out.print("	"+lambda22.get(i)[k][j]);
-////										}
-////										System.out.println();
-////										
-////									}
-////									else if(nucl2.get(i).equals("A")||nucl2.get(i).equals("T")){
-////										System.out.print(pos2.get(i)+"	"+nucl2.get(i));
-////										for (int j=0;j<3;j++){
-////											System.out.print("	"+lambda_context_product6_weight[k][tt1[j]][iii]);
-////										}
-////										for (int j=0;j<3;j++){
-////											System.out.print("	"+lambda22.get(i)[k][j]);
-////										}
-////										System.out.println();
-////									}
-////								}
-//								
-//								
-//								if(nucl2.get(i).equals("C")||nucl2.get(i).equals("G")){
-//									
-//									for (int j=0;j<3;j++){
-//										if(label2.get(i)[j]==1&&coverage2.get(i)>0.5){
-//											pos_gene.add(new double[]{count2.get(i)[k][j],lambda_context_product6_weight[k][tt2[j]][iii]});
-//											//aa_gene.add(amino_acid2.get(i));
-//										}
-//										else if(label2.get(i)[j]==0&&coverage2.get(i)>0.5){
-//											pos_gene_syn.add(new double[]{count2.get(i)[k][j],lambda_context_product6_weight[k][tt2[j]][iii]});
-//											//aa_gene_syn.add(amino_acid2.get(i));
-//										}
-//									}
-//									
-//									if(coverage2.get(i)>=0.05){//0.3
-//										for (int j=0;j<3;j++){
-//											if(label2.get(i)[j]!=0){
-//												lambda_gene.add(lambda_context_product6_weight[k][tt2[j]][iii]);//lambda2.get(i)[k][j]
-//												count_gene.add(count2.get(i)[k][j]);
-//											}
-//											else{
-//												lambda_gene_syn.add(lambda_context_product6_weight[k][tt2[j]][iii]);//lambda2.get(i)[k][j]
-//												count_gene_syn.add(count2.get(i)[k][j]);
-//											}
-//										}
-//									}
-//									
-//								}
-//								else if(nucl2.get(i).equals("A")||nucl2.get(i).equals("T")){
-//									
-//									for (int j=0;j<3;j++){
-//										if(label2.get(i)[j]==1&&coverage2.get(i)>0.5){
-//											pos_gene.add(new double[]{count2.get(i)[k][j],lambda_context_product6_weight[k][tt1[j]][iii]});
-//											//aa_gene.add(amino_acid2.get(i));
-//										}
-//										else if(label2.get(i)[j]==0&&coverage2.get(i)>0.5){
-//											pos_gene_syn.add(new double[]{count2.get(i)[k][j],lambda_context_product6_weight[k][tt1[j]][iii]});
-//											//aa_gene_syn.add(amino_acid2.get(i));
-//										}
-//									}
-//									
-//									if(coverage2.get(i)>=0.05){//0.3
-//										for (int j=0;j<3;j++){
-//											if(label2.get(i)[j]!=0){
-//												lambda_gene.add(lambda_context_product6_weight[k][tt1[j]][iii]);//lambda2.get(i)[k][j]
-//												count_gene.add(count2.get(i)[k][j]);
-//											}
-//											else{
-//												lambda_gene_syn.add(lambda_context_product6_weight[k][tt1[j]][iii]);//lambda2.get(i)[k][j]
-//												count_gene_syn.add(count2.get(i)[k][j]);
-//											}
-//										}
-//									}
-//								}
-//								
-//								
-//							}
-//							else{
-//								
-//								for (int j=0;j<3;j++){
-//									if(label2.get(i)[j]==1&&coverage2.get(i)>0.5){
-//										pos_gene.add(new double[]{count2.get(i)[k][j],lambda2.get(i)[k][j]});
-//										//aa_gene.add(amino_acid2.get(i));
-//									}
-//									else if(label2.get(i)[j]==0&&coverage2.get(i)>0.5){
-//										pos_gene_syn.add(new double[]{count2.get(i)[k][j],lambda2.get(i)[k][j]});
-//										//aa_gene_syn.add(amino_acid2.get(i));
-//									}
-//								}
-//								
-//								if(coverage2.get(i)>=0.05){//0.3
-//										
-//									if(label2.get(i)[0]!=0){
-//										lambda_gene.add(lambda2.get(i)[k][0]);
-//										count_gene.add(count2.get(i)[k][0]);
-//									}
-//									else{
-//										lambda_gene_syn.add(lambda2.get(i)[k][0]);
-//										count_gene_syn.add(count2.get(i)[k][0]);
-//									}
-//									if(label2.get(i)[1]!=0){
-//										lambda_gene.add(lambda2.get(i)[k][1]);
-//										count_gene.add(count2.get(i)[k][1]);
-//									}
-//									else{
-//										lambda_gene_syn.add(lambda2.get(i)[k][1]);
-//										count_gene_syn.add(count2.get(i)[k][1]);
-//									}
-//									if(label2.get(i)[2]!=0){
-//										lambda_gene.add(lambda2.get(i)[k][2]);
-//										count_gene.add(count2.get(i)[k][2]);
-//									}
-//									else{
-//										lambda_gene_syn.add(lambda2.get(i)[k][2]);
-//										count_gene_syn.add(count2.get(i)[k][2]);
-//									}
-//								}
-//							}
-//							
-//							
-//							
-//							
 
-						
 						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
@@ -1670,24 +1438,6 @@ public class ComputeSignificance {
 						}
 						Collections.sort(lambda_count_syn,comppp);
 						
-						
-//						ArrayList<double[]> x=sort(lambda_gene,count_gene);
-//						
-//						lambda_gene=new ArrayList<Double>();
-//						count_gene=new ArrayList<Integer>();
-//						for (int i=0;i<x.size();i++){
-//							lambda_gene.add(x.get(i)[0]);
-//							count_gene.add((int)(x.get(i)[1]));
-//						}
-//						x=sort(lambda_gene_syn,count_gene_syn);
-//						
-//						lambda_gene_syn=new ArrayList<Double>();
-//						count_gene_syn=new ArrayList<Integer>();
-//						for (int i=0;i<x.size();i++){
-//							lambda_gene_syn.add(x.get(i)[0]);
-//							count_gene_syn.add((int)(x.get(i)[1]));
-//						}
-						
 						int err=3;//TODO: 3 ??
 						
 						//System.out.println(genes[c].get(nn).name+"	"+genes[c].get(nn).cov+"	"+genes[c].get(nn).cov_syn);
@@ -1719,19 +1469,7 @@ public class ComputeSignificance {
 								
 								//genes[c].get(nn).sign_hotspot[k]=hotspot_sign(summarize(pos_gene,aa_gene));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								if(!is_or){
-									//if(entities[k].equals("Skin")){
-										
-										/*
-										double sobs = genes[c].get(nn).sobs[k];//["sobs"];
-										double xobs = genes[c].get(nn).xobs[k];//["xobs"];
-										double sexp = genes[c].get(nn).ell_s[k];//["ell_s"];
-										double xexp = genes[c].get(nn).ell_x[k];
-										System.out.println(genes[c].get(nn).name+"	"+sobs+"	"+xobs+"	"+sexp+"	"+xexp);
-										*/
-										
-										//for (int l=0;l<prob_nonsyn.size();l++){
-										//	System.out.println(l+"	"+prob_nonsyn.get(l));
-										//}
+
 										ArrayList<Double> prob_nonsyn=prob_nonsyn(genes[c].get(nn),params[k],mod_C[k], k);
 									
 										if(Double.isNaN(prob_nonsyn.get(prob_nonsyn.size()-1))||Double.isInfinite(prob_nonsyn.get(prob_nonsyn.size()-1))){
@@ -1755,12 +1493,6 @@ public class ComputeSignificance {
 												nnnn++;
 											}
 											
-//											if(entities[k].equals("Thyroid")){
-//												System.out.println(genes[c].get(nn).name);
-//												for (int i=0;i<prob_nonsyn_uniform.size();i++){
-//													System.out.println(i+"	"+prob_nonsyn_uniform.get(i));
-//												}
-//											}
 											
 											if(Double.isNaN(prob_nonsyn_uniform.get(prob_nonsyn_uniform.size()-1))||Double.isInfinite(prob_nonsyn_uniform.get(prob_nonsyn_uniform.size()-1))){
 												genes[c].get(nn).sign_combined_uniform[k]=1.0;
@@ -1783,11 +1515,6 @@ public class ComputeSignificance {
 								genes[c].get(nn).sign_vector_syn[k]=sign(lambda_count_syn,err);//sign(lambda_gene_syn,count_gene_syn,err);
 								//genes[c].get(nn).sign_hotspot_syn[k]=hotspot_sign(summarize(pos_gene_syn,aa_gene_syn));
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
-							
-								//if(entities[k].equals("Skin")){
-								//		System.out.println(genes[c].get(nn).name+"	"+genes[c].get(nn).count[k]+"	"+genes[c].get(nn).sign_combined[k]);
-									//genes[c].get(nn).sign_hotspot[k]+"	"++"	"+genes[c].get(nn).sign_hotspot_syn[k]+"	"+genes[c].get(nn).sign_vector_syn[k]
-								//}
 								
 						}
 							
@@ -2023,21 +1750,7 @@ public class ComputeSignificance {
 			//System.out.println("END2");
 			Collections.sort(s1);
 			Collections.sort(s3);
-			//System.out.println("END3");
-			//System.out.println("Compare");
-			/*double sum1=0;
-			double sum2=0;
-			int nn=0;
-			for (int i=0;i<s1.size();i++){
-				for (int j=0;j<s3.size();j++){
-					if(s1.get(i)+s3.get(j)<=T){
-						sum1+=Math.exp(s1.get(i)+s3.get(j));
-						nn++;
-					}
-					sum2+=Math.exp(s1.get(i)+s3.get(j));
-				///	System.out.println(i+"	"+j+"	"+Math.exp(s1.get(i)+s3.get(j)));
-				}
-			}*/
+
 			
 			
 				int nn=0;
@@ -2053,108 +1766,7 @@ public class ComputeSignificance {
 					}
 				}
 				return (double)(nn)/(double)(s1.size()*s3.size());
-			
-			
-			
-			//System.out.println("frac: "+(double)(nn)/(double)(s1.size()*s3.size()));
-			
-			
-			//System.out.println("sum1: "+sum1);
-			//System.out.println("sum2: "+sum2);
-			//System.out.println("frac_sum: "+(sum1/sum2));
-		/*System.out.println("SUM1");
-			for (int i=0;i<s1.size();i++){
-				System.out.println(Math.exp(s1.get(i)));
-			}
-			System.out.println("SUM2");
-			for (int i=0;i<s3.size();i++){
-				System.out.println(Math.exp(s3.get(i)));
-			}
-			*/
-			/*
-			System.out.println("Experimental");
-			double[] cum=new double[lambda2.size()];
-			double p=0;
-			for (int i=0;i<cum.length;i++){
-				cum[i]=p;
-				p+=lambda2.get(i);
-			}
-			for (int i=0;i<cum.length;i++){
-				cum[i]/=p;
-			}
-			for (int k=0;k<100;k++){
-				int[] count=new int[cum.length];
-				for (int i=0;i<NN;i++){
-					double r=Math.random();
-					for (int j=0;j<cum.length;j++){
-						if(j<cum.length-1){
-							if(cum[j]<=r&&r<cum[j+1]){
-								count[j]++;
-								break;
-							}
-						}
-						else{
-							if(cum[cum.length-1]<=r){
-								count[cum.length-1]++;
-								break;
-							}
-						}
 
-					}
-				}
-				double ss=0;
-				for (int i=0;i<count.length;i++){
-					if(count[i]>0){
-						ss+=Math.log(lambda2.get(i))*count[i];
-					}
-					if(count[i]>1){
-						ss-=Gamma.logGamma(1+count[i]);
-					}
-					
-				}
-				System.out.println(Math.exp(ss));
-			}
-			*/
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/*
-			double sum1=0;
-			double sum2=0;
-			double sum3=0;
-			for (int i=0;i<s1.size();i++){
-				sum1+=(s1.get(i));
-			}
-			for (int i=0;i<s3.size();i++){
-				sum2+=(s3.get(i));
-			}
-			for (int i=0;i<s3.size();i++){
-				if(s3.get(i)+s1.get(0)>T){
-					break;
-				}
-				for (int j=0;j<s1.size();j++){
-					if(s3.get(i)+s1.get(j)>T){
-						break;
-					}
-				//	System.out.println(s3.get(i)+s1.get(j));
-					sum3+=(s3.get(i)+s1.get(j));
-				}
-			}*/
-			
-			/*
-			System.out.println("Sum1: "+sum1);
-			System.out.println("Sum2: "+sum2);
-			System.out.println("Sum3: "+sum3);
-			
-			return sum3-(s3.size()*sum1+s1.size()*sum2);
-			*/
 		}
 		
 		
@@ -2573,31 +2185,6 @@ public class ComputeSignificance {
 				}
 			}
 			
-			//DDDDDDDDDDDDDDD
-			
-			/*
-			for (int i=0;i<s3_quick_row;i++){
-				for (int j=0;j<s3_quick_col;j++){
-					for (int k=0;k<err;k++){
-						s3_quick[i][j]+=Math.log(lambda_count.get((int)(random_conc.nextDouble()*lambda_count.size()))[0]);
-					}
-				}
-			}*/
-			
-			//DDDDDDDDDD
-			//if(true){
-			//	return 1.0;
-			//}
-			
-			/*
-			for (int i=0;i<s1_quick_row;i++){
-				Arrays.sort(s1_quick[i]);
-			}
-			for (int i=0;i<s3_quick_row;i++){
-				Arrays.sort(s3_quick[i]);
-			}*/
-			
-			////DDDDDDDDDD
 			
 			double ppp=0;
 			double [] cum_probability=new double[probability.size()];
@@ -3331,12 +2918,6 @@ public class ComputeSignificance {
 				count2.add(count.get(50));
 				amino_acid2.add(amino_acid.get(50));
 				
-				System.out.println("\n\n\nLOLOLOL\n\n\n(pos,nucl,count)");
-				System.out.println(pos.get(50));
-				System.out.println(nucl.get(50));
-				System.out.println(count.get(50));
-
-
 				if (valid){
 					lambda2.add(new double[][]{{index}});
 				
@@ -3513,14 +3094,6 @@ public class ComputeSignificance {
 					//}
 					//lambda22.add(product(weights,weights_index,lambda));
 					
-					System.out.println("LOOK HERE \n\n\nlambda2");
-					System.out.println(Arrays.deepToString(lambda2));
-					System.out.println("LOOK HERE \n\n\n s i z e ");
-					System.out.println("LOOK HERE \n\n\n s i z e ");
-					System.out.println("LOOK HERE \n\n\n s i z e ");
-					System.out.println(lambda2.size());
-
-					
 				}
 
 			}
@@ -3533,7 +3106,7 @@ public class ComputeSignificance {
 			}
 			
 			
-		}
+		} // end of _10_10 ???? 
 		
 		
 		
