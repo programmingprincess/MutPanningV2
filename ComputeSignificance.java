@@ -3514,7 +3514,8 @@ public class ComputeSignificance {
 					//lambda22.add(product(weights,weights_index,lambda));
 					
 					System.out.println("LOOK HERE \n\n\nlambda2");
-					System.out.println(Arrays.deepToString(lambda2));
+					
+					System.out.println(Arrays.toString(lambda2.toArray()));
 					System.out.println("LOOK HERE \n\n\n s i z e ");
 					System.out.println("LOOK HERE \n\n\n s i z e ");
 					System.out.println("LOOK HERE \n\n\n s i z e ");
