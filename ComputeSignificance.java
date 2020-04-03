@@ -149,31 +149,6 @@ public class ComputeSignificance {
 		compute_uniform=args_compute_uniform;
 		entities=args_entities;
 		
-		//System.exit(0);
-		
-		/*
-		{
-			//double x1=20;
-			double x2=8.08;
-			for (double n=1;n<=500;n++){
-				
-				System.out.println(n+"	"+Math.log(Bessel.k(x2, n, false))+"	"+Math.log(Bessel.k(x2, n, true)));
-				//+"	"+Bessel.k(x1, n, false)
-			}
-			
-			for (double alpha=1;alpha<=1000;alpha*=1.1){
-				System.out.println(alpha+"	"+Math.log(Bessel.k(alpha, 300, false))+"	"+Math.log(Bessel.k(alpha, 300, true)));
-			}
-			
-			System.exit(0);
-		}
-		*/
-		
-		/*
-		for (int i=0;i<failed_genes.length;i++){
-			table_failed_genes.put(failed_genes[i],i);
-		}
-		*/
 		
 		random_conc=ThreadLocalRandom.current();//new SplittableRandom();//
 		file_out=args[0]+"SignificanceRaw/Significance";
@@ -264,8 +239,7 @@ public class ComputeSignificance {
 				lambda_t[0]=new double[]{2*(double)(b[0]+b[1]+b[2])/(double)(sum),2*(double)(b[3]+b[4]+b[5])/(double)(sum)};
 				lambda_t[1]=new double[]{3*(double)(b[0]+b[3])/(double)(sum),3*(double)(b[1]+b[5])/(double)(sum),3*(double)(b[2]+b[4])/(double)(sum)};
 				lambda_type.add(lambda_t);
-				System.out.println("\n\n\n LULULULULULULUL");
-				System.out.println(Arrays.deepToString(lambda_type));
+
 			} // end of while 
 			input.close();
 			
@@ -370,6 +344,16 @@ public class ComputeSignificance {
 
 
 			// jiaqi added
+			System.out.println("jiaqi jiaqi jiaqi")
+			System.out.println("get(i).length: ")
+			System.out.println(lambda_context.get(0).length)
+			
+			System.out.println("lambda_context.get(0)[0].length")
+			System.out.println(lambda_context.get(0)[0].length)
+
+			System.out.println("lambda_context.get(0)[0][0].length")
+			System.out.println(lambda_context.get(0)[0][0].length)
+
 
 			FileWriter out=new FileWriter(file_out_lambda);
 			BufferedWriter output= new BufferedWriter(out);
@@ -447,6 +431,10 @@ public class ComputeSignificance {
 			for (int k=0;k<6;k++){
 				double[][] lambda_context_product6=new double[lambda_context.size()][1];
 				
+				//lambda_context_product6 is the lambda_t in the lambda_pos equation 
+				//here, we multiply the two components that make up lambda_context_product6:
+				//lambda_n(t) and lambda_c(t) per cluster 
+
 				for (int a=0;a<lambda_context.size();a++){
 					lambda_context_product6[a][0]=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
 					for (int l=0;l<10;l++){
