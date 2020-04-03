@@ -240,7 +240,7 @@ public class ComputeSignificance {
 				lambda_t[1]=new double[]{3*(double)(b[0]+b[3])/(double)(sum),3*(double)(b[1]+b[5])/(double)(sum),3*(double)(b[2]+b[4])/(double)(sum)};
 				lambda_type.add(lambda_t);
 
-			} // end of while 
+			} // end of while for reading file_signatures...contains counts for each position, per cluster! 
 			input.close();
 			
 			
@@ -331,6 +331,7 @@ public class ComputeSignificance {
 			inn=new DataInputStream(in);
 			input= new BufferedReader(new InputStreamReader(inn));
 			input.readLine();
+			//for each cluster, add up the type counts
 			while((s=input.readLine())!=null){
 				String[] t=s.split("	");
 				int c=count.get(index(t[0],names_count));
@@ -384,6 +385,9 @@ public class ComputeSignificance {
 			//normalize weights. weight <0.01 are set to 0
 			//this safes a lot of run time and does not affect the
 			//mutation rate of the sample substantially
+
+			//weights are the sum of all mutations per entity 
+
 			for (int i=0;i<weights.length;i++){
 				double sum=0;
 				for (int j=0;j<weights[i].length;j++){
@@ -397,6 +401,7 @@ public class ComputeSignificance {
 						weights[i][j]=0;
 					}
 				}
+
 				sum=0;
 				for (int j=0;j<weights[i].length;j++){
 					sum+=weights[i][j];
@@ -406,6 +411,13 @@ public class ComputeSignificance {
 				}
 			}
 			
+			System.out.println("entities LOLOLOL");
+			System.out.println(Arrays.toString(entities));
+
+			System.out.println("w e i g h t s after processing ");
+			System.out.println(Arrays.toString(weights));
+
+			//add only the counts that are > 0 to the weights index, to save run time
 			weights_index=new ArrayList[weights.length];
 			for (int i=0;i<weights.length;i++){
 				weights_index[i]=new ArrayList<Integer>();
@@ -425,6 +437,10 @@ public class ComputeSignificance {
 				//lambda_context_product6 is the lambda_t in the lambda_pos equation 
 				//here, we multiply the two components that make up lambda_context_product6:
 				//lambda_n(t) and lambda_c(t) per cluster 
+
+				System.out.println("jiaqi jiaqi jiaqi");
+				System.out.println("lambda_context_product6[a].length");
+				System.out.println(lambda_context_product6[0].length);
 
 				for (int a=0;a<lambda_context.size();a++){
 					lambda_context_product6[a][0]=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
@@ -460,6 +476,7 @@ public class ComputeSignificance {
 			System.out.println(lambda_context_product6_weight[0][0].length);
 
 			System.out.println(lambda_context_product6_weight[0][0][0]);
+
 
 			
 			System.out.println(System.currentTimeMillis());
@@ -623,13 +640,7 @@ public class ComputeSignificance {
 
 				mod_C[k]	= (int)(all_models.get(cur_ind)[all_models.get(cur_ind).length-1]);
 				params[k]	= sub(all_models.get(cur_ind),0,all_models.get(cur_ind).length-2);//[:-2];
-				
-				//System.out.println("Using model "+mod_choice[mod_C]);
-//				System.out.print(entities[k]+"	"+mod_C[k]);
-//				for (int i=0;i<params[k].length;i++){
-//					System.out.print("	"+params[k][i]);
-//				}
-//				System.out.println();
+			
 			}
 			
 			
@@ -648,60 +659,8 @@ public class ComputeSignificance {
 			
 			System.out.println("START");
 			for (int i=0;i<chr.length;i++){
-				//if(chr[i].equals("3")){
 				run(i);
-				//}
-				//run(index("Y",chr));
 			}
-			
-			/*
-			for (int i=0;i<entities.length;i++){
-				in=new FileInputStream(file_out+entities[i]+"V2.txt");
-				inn=new DataInputStream(in);
-				input= new BufferedReader(new InputStreamReader(inn));
-				input.readLine();
-				while((s=input.readLine())!=null){
-					String[] t=s.split("	");
-					int[] ii=table_gene.get(t[0]);
-					if(ii!=null){
-						genes[ii[0]].get(ii[1]).sign_vector_syn[i]=Double.parseDouble(t[5]);
-						genes[ii[0]].get(ii[1]).sign_hotspot_syn[i]=1;//Double.parseDouble(t[6]);
-						//genes[ii[0]].get(ii[1]).sign_complete_syn[i]=Double.parseDouble(t[7]);ddd
-						genes[ii[0]].get(ii[1]).sign_combined[i]=Double.parseDouble(t[8]);
-						//genes[ii[0]].get(ii[1]).sign_destruct[i]=Double.parseDouble(t[9]);
-						genes[ii[0]].get(ii[1]).sign_hotspot[i]=Double.parseDouble(t[10]);
-						//genes[ii[0]].get(ii[1]).sign_complete[i]=Double.parseDouble(t[11]);
-					}
-					
-				}
-				input.close();
-				
-				if(compute_uniform[i]){
-					in=new FileInputStream(file_out_uniform+entities[i]+"V2.txt");
-					inn=new DataInputStream(in);
-					input= new BufferedReader(new InputStreamReader(inn));
-					input.readLine();
-					while((s=input.readLine())!=null){
-						String[] t=s.split("	");
-						int[] ii=table_gene.get(t[0]);
-						if(ii!=null){
-							//genes[ii[0]].get(ii[1]).sign_vector_syn[i]=Double.parseDouble(t[5]);
-							//genes[ii[0]].get(ii[1]).sign_hotspot_syn[i]=Double.parseDouble(t[6]);
-							//genes[ii[0]].get(ii[1]).sign_complete_syn[i]=Double.parseDouble(t[7]);ddd
-							genes[ii[0]].get(ii[1]).sign_combined_uniform[i]=Double.parseDouble(t[8]);
-							//genes[ii[0]].get(ii[1]).sign_destruct[i]=Double.parseDouble(t[9]);
-							//genes[ii[0]].get(ii[1]).sign_hotspot[i]=Double.parseDouble(t[10]);
-							//genes[ii[0]].get(ii[1]).sign_complete[i]=Double.parseDouble(t[11]);
-						}
-						
-					}
-					input.close();
-				}
-			}
-			
-			
-			*/
-			
 			
 			
 			
@@ -1630,12 +1589,7 @@ public class ComputeSignificance {
 					}
 				}
 				s1.add(-sum1);
-				//for (int i=0;i<meta_random.length;i++){
-				//	System.out.print("	"+meta_random[i]);
-				//}
-				//System.out.println();
 			}
-			//System.out.println("END");
 			
 		
 			
