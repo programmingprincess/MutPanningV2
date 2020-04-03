@@ -344,15 +344,6 @@ public class ComputeSignificance {
 
 
 			// jiaqi added
-			System.out.println("jiaqi jiaqi jiaqi")
-			System.out.println("get(i).length: ")
-			System.out.println(lambda_context.get(0).length)
-			
-			System.out.println("lambda_context.get(0)[0].length")
-			System.out.println(lambda_context.get(0)[0].length)
-
-			System.out.println("lambda_context.get(0)[0][0].length")
-			System.out.println(lambda_context.get(0)[0][0].length)
 
 
 			FileWriter out=new FileWriter(file_out_lambda);
@@ -456,7 +447,20 @@ public class ComputeSignificance {
 					}
 					
 				}
-			}
+			} //end of 6 for loop 
+
+			System.out.println("jiaqi jiaqi jiaqi");
+			System.out.println("lambda_context_product6_weight.length");
+			System.out.println(lambda_context_product6_weight.length);
+			
+			System.out.println("lambda_context_product6_weight[0].length");
+			System.out.println(lambda_context_product6_weight[0].length);
+
+			System.out.println("lambda_context_product6_weight[0][0].length");
+			System.out.println(lambda_context_product6_weight[0][0].length);
+
+			System.out.println(lambda_context_product6_weight[0][0][0]);
+
 			
 			System.out.println(System.currentTimeMillis());
 			
