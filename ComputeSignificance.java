@@ -442,6 +442,7 @@ public class ComputeSignificance {
 				System.out.println("lambda_context_product6[a].length");
 				System.out.println(lambda_context_product6[0].length);
 
+				//lambda_context.size() is cluster numbers 
 				for (int a=0;a<lambda_context.size();a++){
 					lambda_context_product6[a][0]=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
 					for (int l=0;l<10;l++){
@@ -1031,6 +1032,7 @@ public class ComputeSignificance {
 			System.runFinalization();
 			
 			try{
+				// nucl 50 
 				String s="";
 				for (int i=0;i<50;i++){
 					pos.add(-1);
@@ -1076,6 +1078,7 @@ public class ComputeSignificance {
 					}
 					
 					//remove the squence of the previous gene out of the queue
+
 					if(ii>0){
 						for (int i=ii-1;i>=0;i--){
 							nucl2.remove(i);
@@ -1096,11 +1099,22 @@ public class ComputeSignificance {
 						//	System.out.println(nnn+"/"+n+"	"+System.currentTimeMillis());
 						//}
 						
+						//AnnotationChr1, etc
+						//t
+						// 0 = position? 
+						// 1 = nucleotide 
+						// 2 = ?? 
+						// 3 = AA? 
+						// 4 = unknown number 
+						// 5-8 = mutated AAs??? 
 						String[] t=s.split("	");
+
+						//AlignHg19 
 						String[] t2=input2.readLine().split("	");
 						
 						int[] label_local=new int[3];
 						if(t.length>3){
+							// if REF AA = Mutated AA... then synonymous mut 
 							if(t[3].equals(t[5])){
 								label_local[0]=0;//"syn";
 							}
@@ -2697,7 +2711,12 @@ public class ComputeSignificance {
 		
 		
 		
-		
+		// jiaqi added 
+		// method to output the likelihood of each context
+
+		public static void update_10_10(){
+
+		}
 	
 		
 		//the "heart" of this thread which computes the local mutation rate in the center of a queu and appends it to output
@@ -2739,7 +2758,8 @@ public class ComputeSignificance {
 							valid=false;
 						}
 					}
-				}
+				} //end of nucl = C, T
+				//A or G 
 				else {
 					int n=1;
 					for (int j=5;j>=1;j--){
@@ -2761,7 +2781,7 @@ public class ComputeSignificance {
 							valid=false;
 						}
 					}
-				}
+				} //end of nucl = A, G 
 				
 				pos2.add(pos.get(50));
 				nucl2.add(nucl.get(50));
@@ -2813,8 +2833,12 @@ public class ComputeSignificance {
 								}		
 							}
 						}
-					}
+					} //end of nucl=A
 					else if(nucl.get(50).equals("C")){
+
+						// TODO 
+						// why are they only looking at 10 nucleotides? 
+
 						for (int i=0;i<lambda.length;i++){
 							lambda[i][0]=lambda_type.get(i)[1][0];
 							lambda[i][1]=lambda_type.get(i)[1][1];
