@@ -648,7 +648,7 @@ public class ComputeSignificance {
 
 			// TODO: edit for chr 22 only 
 			// limiting to chr 22 jiaqi 
-			run("22");
+			run(21);
 			// for (int i=0;i<chr.length;i++){
 			// 	run(i);
 			// }
@@ -1001,6 +1001,7 @@ public class ComputeSignificance {
 
 		// int c = chromosome
 		public static void run(int c){
+			System.out.println("Running chr: " + chr[c]);
 
 			
 			pos=new ArrayList<Integer>();
