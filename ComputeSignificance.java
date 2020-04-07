@@ -54,7 +54,8 @@ import jdistlib.math.Bessel;
 public class ComputeSignificance {
 	static ArrayList<double[][][]> lambda_context=new ArrayList<double[][][]>();
 	static ArrayList<double[][]> lambda_type=new ArrayList<double[][]>();
-	static String[] chr={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"};
+	//static String[] chr={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"};
+	static String[] chr={"22"};
 	
 	static double[][][] lambda_context_product6_weight=null;
 	
@@ -465,20 +466,6 @@ public class ComputeSignificance {
 					
 				}
 			} //end of 6 for loop 
-
-			System.out.println("jiaqi jiaqi jiaqi");
-			System.out.println("lambda_context_product6_weight.length");
-			System.out.println(lambda_context_product6_weight.length);
-			
-			System.out.println("lambda_context_product6_weight[0].length");
-			System.out.println(lambda_context_product6_weight[0].length);
-
-			System.out.println("lambda_context_product6_weight[0][0].length");
-			System.out.println(lambda_context_product6_weight[0][0].length);
-
-			System.out.println(lambda_context_product6_weight[0][0][0]);
-
-
 			
 			System.out.println(System.currentTimeMillis());
 			
@@ -1008,6 +995,8 @@ public class ComputeSignificance {
 	
 		
 		//BufferedWriter output=null;
+
+		// int c = chromosome
 		public static void run(int c){
 
 			
@@ -1034,6 +1023,8 @@ public class ComputeSignificance {
 			try{
 				// nucl 50 
 				String s="";
+
+				//first 50 sequences of chr are empty? 
 				for (int i=0;i<50;i++){
 					pos.add(-1);
 					nucl.add("N");
@@ -1113,6 +1104,8 @@ public class ComputeSignificance {
 						String[] t2=input2.readLine().split("	");
 						
 						int[] label_local=new int[3];
+
+						// if > 3, that means there is AA info 
 						if(t.length>3){
 							// if REF AA = Mutated AA... then synonymous mut 
 							if(t[3].equals(t[5])){
@@ -1197,7 +1190,8 @@ public class ComputeSignificance {
 							
 							
 						}
-					}
+					} // end of while for reading annotation txt 
+
 					if(s==null){
 						for (int i=0;i<50;i++){
 							pos.add(-1);
@@ -2714,7 +2708,7 @@ public class ComputeSignificance {
 		// jiaqi added 
 		// method to output the likelihood of each context
 
-		public static void update_10_10(){
+		public static void get_lambda(){
 
 		}
 	
@@ -2735,10 +2729,16 @@ public class ComputeSignificance {
 				//int[] xx=new int[20];
 				
 				
+				//using ".get(50)" because that is the center of the sequence
+
 				boolean valid=true;
 				int index=0;
 				if(nucl.get(50).equals("C")||nucl.get(50).equals("T")){
 					int n=1;
+
+					//j is going around to find the "context"
+					// -5   -4   -3   -2   -1
+					// 45   46   47   48   49
 					for (int j=-5;j<=-1;j++){
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*nucl_index.get(50+j);
@@ -2749,6 +2749,8 @@ public class ComputeSignificance {
 						}
 						
 					}
+					// 1    2    3    4    5
+					// 51   52   53   54   55
 					for (int j=1;j<=5;j++){
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*nucl_index.get(50+j);
@@ -2759,9 +2761,13 @@ public class ComputeSignificance {
 						}
 					}
 				} //end of nucl = C, T
+
+				//reverse strand 
 				//A or G 
 				else {
 					int n=1;
+					// 5    4    3    2    1
+					// 55   54   53   52   51
 					for (int j=5;j>=1;j--){
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*(3-nucl_index.get(50+j));
@@ -2772,6 +2778,9 @@ public class ComputeSignificance {
 						}
 						
 					}
+
+					// -1   -2   -3   -2   -1
+					// 49   48   47   46   45
 					for (int j=-1;j>=-5;j--){
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*(3-nucl_index.get(50+j));
@@ -2791,10 +2800,13 @@ public class ComputeSignificance {
 				amino_acid2.add(amino_acid.get(50));
 				
 				if (valid){
+					System.out.println("Jiaqi: Valid\n\n");
+					System.out.println(index);
+
 					lambda2.add(new double[][]{{index}});
 				
 				}
-				else{
+				else {
 					double[][] lambda=new double[lambda_context.size()][3];
 					
 					if(nucl.get(50).equals("A")){
@@ -2963,14 +2975,15 @@ public class ComputeSignificance {
 						}
 					}
 					
+					System.out.println("Jiaqi: Not valid");
+					System.out.println("product(weights,weights_index,lambda)\n\n");
+					System.out.println(product(weights,weights_index,lambda));
 					
-					//if(!valid){
-						lambda2.add(product(weights,weights_index,lambda));
-						
-					//}
-					//lambda22.add(product(weights,weights_index,lambda));
 					
-				}
+					lambda2.add(product(weights,weights_index,lambda));
+					
+					
+				} //end of ELSE for not valid 
 
 			}
 			catch(Exception e){
@@ -3007,10 +3020,6 @@ public class ComputeSignificance {
 				for (int k=0;k<index[i].size();k++){
 					z[i][j]+=x[i][index[i].get(k)]*y[index[i].get(k)][j];
 				}
-				
-//				for (int k=0;k<y.length;k++){
-//					z[i][j]+=x[i][k]*y[k][j];
-//				}
 			}
 		}
 		return z;
