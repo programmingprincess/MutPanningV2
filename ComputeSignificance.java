@@ -1855,27 +1855,6 @@ public class ComputeSignificance {
 			}
 		}
 		
-		//public static double signREVISED(int count, ArrayList<double[]> lambda2, ArrayList<Integer> count2 ,ArrayList<Double> probability, int err){//int err, 
-			//double sign_quick=sign_quickREVISED(count, lambda2,count2, probability,err);//err,
-			//if(true){
-			//	return sign_quick;
-			//}
-			//System.out.println(sign_quick);
-			/*
-			if(sign_quick<0.001){
-				double d=sign_longREVISED(count, lambda2,count2,probability,err);
-				//if(d<0.00001){
-				//	d=sign_longREVISED2(count, lambda2,count2,probability,err);
-				//}
-				//System.out.println("sign	"+sign_quick+"	"+d);
-				return d;//err
-			}
-			else{
-				return sign_quick;
-			}*/
-			//return sign_quick;
-		//}
-		
 		static int[][] count_quick=new int[100][20000];
 		static double[][] s1_quick=new double[100][100]; 
 		static double[][] s3_quick=new double[100][1000]; 
@@ -2804,8 +2783,9 @@ public class ComputeSignificance {
 				amino_acid2.add(amino_acid.get(50));
 				
 				if (valid){
-					System.out.println("Jiaqi: Valid\n\n");
+					System.out.println("Jiaqi: Valid");
 					System.out.println(index);
+					System.out.println("\n\n\n");
 
 					lambda2.add(new double[][]{{index}});
 				
@@ -2980,8 +2960,9 @@ public class ComputeSignificance {
 					}
 					
 					System.out.println("Jiaqi: Not valid");
-					System.out.println("product(weights,weights_index,lambda)\n\n");
-					System.out.println(product(weights,weights_index,lambda));
+					System.out.println("product(weights,weights_index,lambda)");
+					System.out.println(Arrays.toString(product(weights,weights_index,lambda)));
+					System.out.println("\n\n\n");
 					
 					
 					lambda2.add(product(weights,weights_index,lambda));
