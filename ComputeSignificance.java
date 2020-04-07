@@ -1928,7 +1928,7 @@ public class ComputeSignificance {
 
 			// JIAQI!! 
 			// Evidence that `lambda_count` is lambda in paper 
-			// See Supplement: 3.5 Simulation of θ2! (k_high) is SUM lambda^2 > 0.99
+			// See Supplement: 3.5 Simulation of omega_2! (k_high) is SUM lambda^2 > 0.99
 			int lambda_high_n=0;
 			double sum_local=0;
 			for (int i=0;i<lambda_count.size();i++){
