@@ -1373,7 +1373,7 @@ public class ComputeSignificance {
 
 						//jiaqi jiaqiiiii
 						for (int i=0;i<lambda_count.size();i++){
-							System.out.println("Lambda: " + String(i));
+							System.out.println("Lambda: %d", i);
 							System.out.println("lambda_count.get(i)[0]");
 							System.out.println(lambda_count.get(i)[0]);
 							System.out.println("lambda_count.get(i)[1]");
