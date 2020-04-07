@@ -1370,31 +1370,29 @@ public class ComputeSignificance {
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								
 						} //end else of cov check 
+
+						//jiaqi jiaqiiiii
+						for (int i=0;i<lambda_count.size();i++){
+							System.out.println("Lambda: " + String(i));
+							System.out.println("lambda_count.get(i)[0]");
+							System.out.println(lambda_count.get(i)[0]);
+							System.out.println("lambda_count.get(i)[1]");
+							System.out.println(lambda_count.get(i)[1]);
+							System.out.println("\n\n\n");
+
+							sum_local+=Math.pow(lambda_count.get(i)[0],2);
+							if(sum_local/sum_sq>0.99){
+									break;
+							}
+							fraction_high+=lambda_count.get(i)[0]/sum_lambda;
+							//lambda_high.add(lambda2.get(i));
+							lambda_high_n++;
+							if(lambda_high_n>50000){
+								return 1;
+							}
+						}
 							
-					} //end of entities for loop 
-				
-					//jiaqi jiaqiiiii
-					for (int i=0;i<lambda_count.size();i++){
-						System.out.println("Lambda: " + String(i));
-						System.out.println("lambda_count.get(i)[0]");
-						System.out.println(lambda_count.get(i)[0]);
-						System.out.println("lambda_count.get(i)[1]");
-						System.out.println(lambda_count.get(i)[1]);
-						System.out.println("\n\n\n");
-
-						sum_local+=Math.pow(lambda_count.get(i)[0],2);
-						if(sum_local/sum_sq>0.99){
-								break;
-						}
-						fraction_high+=lambda_count.get(i)[0]/sum_lambda;
-						//lambda_high.add(lambda2.get(i));
-						lambda_high_n++;
-						if(lambda_high_n>50000){
-							return 1;
-						}
-					}
-
-					
+					} //end of entities for loop 					
 					
 				}
 				//compute the last mutation rates at the end of the chr until the queue empty 
