@@ -438,10 +438,6 @@ public class ComputeSignificance {
 				//here, we multiply the two components that make up lambda_context_product6:
 				//lambda_n(t) and lambda_c(t) per cluster 
 
-				System.out.println("jiaqi jiaqi jiaqi");
-				System.out.println("lambda_context_product6[a].length");
-				System.out.println(lambda_context_product6[0].length);
-
 				//lambda_context.size() is cluster numbers 
 				for (int a=0;a<lambda_context.size();a++){
 					lambda_context_product6[a][0]=lambda_type.get(a)[0][k/3]*lambda_type.get(a)[1][ttt[k]];
@@ -903,7 +899,6 @@ public class ComputeSignificance {
 				output.newLine();
 				
 				for (int i=0;i<genes_all.size();i++){//genes_all.get(i).sign_vector+"	"+genes_all.get(i).sign_cbase+"	"+
-					//output.write(genes_all.get(i).name+"	"+genes_all.get(i).cov+"	"+genes_all.get(i).cov_syn+"	"+genes_all.get(i).count+"	"+genes_all.get(i).count_syn+"	"+genes_all.get(i).sign_vector_syn+"	"+genes_all.get(i).sign_hotspot_syn+"	"+genes_all.get(i).sign_complete_syn+"	"+genes_all.get(i).sign_combined+"	"+genes_all.get(i).sign_destruct+"	"+genes_all.get(i).sign_hotspot+"	"+genes_all.get(i).sign_complete+"	"+genes_all.get(i).fdr_syn+"	"+genes_all.get(i).fdr);
 					output.write(genes_all.get(i).name+"	"+genes_all.get(i).cov+"	"+genes_all.get(i).cov_syn+"	"+genes_all.get(i).count+"	"+genes_all.get(i).count_syn+"	"+genes_all.get(i).sign_complete_syn+"	"+genes_all.get(i).fdr_syn+"	"+genes_all.get(i).sign_complete+"	"+genes_all.get(i).fdr);
 					output.newLine();
 				}
@@ -945,7 +940,6 @@ public class ComputeSignificance {
 					output.newLine();
 					
 					for (int i=0;i<genes_all_uniform.size();i++){//genes_all.get(i).sign_vector+"	"+genes_all.get(i).sign_cbase+"	"+
-						//output.write(genes_all_uniform.get(i).name+"	"+genes_all_uniform.get(i).cov+"	"+genes_all_uniform.get(i).cov_syn+"	"+genes_all_uniform.get(i).count+"	"+genes_all_uniform.get(i).count_syn+"	"+genes_all_uniform.get(i).sign_vector_syn+"	"+genes_all_uniform.get(i).sign_hotspot_syn+"	"+genes_all_uniform.get(i).sign_complete_syn+"	"+genes_all_uniform.get(i).sign_combined+"	"+genes_all_uniform.get(i).sign_destruct+"	"+genes_all_uniform.get(i).sign_hotspot+"	"+genes_all_uniform.get(i).sign_complete+"	"+genes_all_uniform.get(i).fdr_syn+"	"+genes_all_uniform.get(i).fdr);
 						output.write(genes_all_uniform.get(i).name+"	"+genes_all_uniform.get(i).cov+"	"+genes_all_uniform.get(i).cov_syn+"	"+genes_all_uniform.get(i).count+"	"+genes_all_uniform.get(i).count_syn+"	"+genes_all_uniform.get(i).sign_complete_syn+"	"+genes_all_uniform.get(i).fdr_syn+"	"+genes_all_uniform.get(i).sign_complete+"	"+genes_all_uniform.get(i).fdr);
 						output.newLine();
 					}
@@ -1205,7 +1199,6 @@ public class ComputeSignificance {
 							label.add(new int[0]);
 							count.add(new int[0][0]);
 							amino_acid.add("-");
-							//update_10_10();
 							update_10_10();
 							pos.remove(0);
 							nucl.remove(0);
@@ -1217,13 +1210,6 @@ public class ComputeSignificance {
 						}
 					}
 					
-					/*
-					if(table_failed_genes.get(genes[c].get(nn).name)==null){
-						continue;
-					}*/
-					
-					//ArrayList<String> aa_gene=new ArrayList<String>();
-					//ArrayList<String> aa_gene_syn=new ArrayList<String>();
 					ArrayList<int[]> index_gene=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene_syn=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene2=new ArrayList<int[]>();
@@ -1235,6 +1221,7 @@ public class ComputeSignificance {
 						}
 						if(coverage2.get(i)>0.5){
 							for (int j=0;j<3;j++){
+
 								if(label2.get(i)[j]==1){
 									index_gene.add(new int[]{i,j});
 									//aa_gene.add(amino_acid2.get(i));
@@ -1267,9 +1254,13 @@ public class ComputeSignificance {
 						
 					for (int k=0;k<entities.length;k++){
 
-						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
+
+						//index_gene2: [0] is the position 
+						// 						 [1] refers to TYPE change (i.e., SYN/NS/NC?? depending on subs. type)
+ 						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
+							//valid...index+=  (weird number)
 							if(lambda2.get(index_gene2.get(jj)[0]).length==1){
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
@@ -1279,11 +1270,13 @@ public class ComputeSignificance {
 									x=lambda_context_product6_weight[k][tt1[index_gene2.get(jj)[1]]][iii];
 								}
 							}
+							//calculated!! (product XYZ, has 2x3 array)
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 							}
-							
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
+
+
 						}
 						Collections.sort(lambda_count,comppp);
 						
@@ -1323,20 +1316,12 @@ public class ComputeSignificance {
 						
 						else{
 							
-							//if(entities[k].equals("Skin")){
 								
 								//System.out.println("Sign "+genes[c].get(nn).name+"	"+entities[k]);
-								
 								//TODO: reevaluate which of these sign values are needed later
-								
-								
 								//System.out.println("size	"+prob_nonsyn.size());
-								
-								
 								genes[c].get(nn).sign_hotspot[k]=hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
-								
-								
-								//genes[c].get(nn).sign_hotspot[k]=hotspot_sign(summarize(pos_gene,aa_gene));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
+
 								if(!is_or){
 
 										ArrayList<Double> prob_nonsyn=prob_nonsyn(genes[c].get(nn),params[k],mod_C[k], k);
@@ -1382,14 +1367,32 @@ public class ComputeSignificance {
 									genes[c].get(nn).sign_combined[k]=1.0;
 								}
 								genes[c].get(nn).sign_vector_syn[k]=sign(lambda_count_syn,err);//sign(lambda_gene_syn,count_gene_syn,err);
-								//genes[c].get(nn).sign_hotspot_syn[k]=hotspot_sign(summarize(pos_gene_syn,aa_gene_syn));
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								
-						}
+						} //end else of cov check 
 							
+					} //end of entities for loop 
+				
+					//jiaqi jiaqiiiii
+					for (int i=0;i<lambda_count.size();i++){
+						System.out.println("Lambda: " + String(i));
+						System.out.println("lambda_count.get(i)[0]")
+						System.out.println(lambda_count.get(i)[0]);
+						System.out.println("lambda_count.get(i)[1]")
+						System.out.println(lambda_count.get(i)[1]);
+						System.out.println("\n\n\n")
+
+						sum_local+=Math.pow(lambda_count.get(i)[0],2);
+						if(sum_local/sum_sq>0.99){
+								break;
+						}
+						fraction_high+=lambda_count.get(i)[0]/sum_lambda;
+						//lambda_high.add(lambda2.get(i));
+						lambda_high_n++;
+						if(lambda_high_n>50000){
+							return 1;
+						}
 					}
-				
-				
 
 					
 					
@@ -1497,7 +1500,9 @@ public class ComputeSignificance {
 		static Comparator<double[]> comp0=(double[] a, double[] b)->{
 			return -new Double(a[0]).compareTo(b[0]);
 		};
-		
+
+
+		//significance long? 
 		public static double sign_long(ArrayList<double[]> lambda_count, int err){
 			
 			
@@ -1631,7 +1636,7 @@ public class ComputeSignificance {
 				}
 				return (double)(nn)/(double)(s1.size()*s3.size());
 
-		}
+		} //end of sign_long
 		
 		
 		public static int[] random_collision (int N, double[] cum){
@@ -1767,10 +1772,6 @@ public class ComputeSignificance {
 					}
 				}
 				s1.add(-sum1);
-				//for (int i=0;i<meta_random.length;i++){
-				//	System.out.print("	"+meta_random[i]);
-				//}
-				//System.out.println();
 			}
 			//System.out.println("END");
 			for (int k2=0;k2<1000;k2++){//
@@ -1924,6 +1925,10 @@ public class ComputeSignificance {
 		
 			double fraction_high=0;
 	//		ArrayList<Double> lambda_high=new ArrayList<Double>();
+
+			// JIAQI!! 
+			// Evidence that `lambda_count` is lambda in paper 
+			// See Supplement: 3.5 Simulation of θ2! (k_high) is SUM lambda^2 > 0.99
 			int lambda_high_n=0;
 			double sum_local=0;
 			for (int i=0;i<lambda_count.size();i++){
@@ -1972,7 +1977,9 @@ public class ComputeSignificance {
 			int s1_quick_col=100;
 			int s3_quick_col=1000;
 			
-			//System.out.println(lambda_high_n);
+			System.out.println("jiaqi: lambda_high_n");
+			System.out.println(lambda_high_n);
+			System.out.println("\n\n");
 			
 			//int[][] count_quick=new int[s1_quick_col][lambda_high_n];
 			if(lambda_high_n>20000){
@@ -2418,7 +2425,7 @@ public class ComputeSignificance {
 
 			return sign;
 			
-		}
+		} // end of signREVISED
 		
 		public static double err(ArrayList<double[]> lambda_count, int err){
 			double sum=0;
@@ -2466,7 +2473,7 @@ public class ComputeSignificance {
 			return array;
 			
 			
-		}
+		} //end of prob lambda
 		
 		public static int[] create_index(double[] cum){
 			int[] index=new int[101];
@@ -2783,9 +2790,9 @@ public class ComputeSignificance {
 				amino_acid2.add(amino_acid.get(50));
 				
 				if (valid){
-					System.out.println("Jiaqi: Valid");
-					System.out.println(index);
-					System.out.println("\n\n\n");
+					// System.out.println("Jiaqi: Valid");
+					// System.out.println(index);
+					// System.out.println("\n\n\n");
 
 					lambda2.add(new double[][]{{index}});
 				
@@ -2959,10 +2966,10 @@ public class ComputeSignificance {
 						}
 					}
 					
-					System.out.println("Jiaqi: Not valid");
-					System.out.println("product(weights,weights_index,lambda)");
-					System.out.println(Arrays.deepToString(product(weights,weights_index,lambda)));
-					System.out.println("\n\n\n");
+					// System.out.println("Jiaqi: Not valid");
+					// System.out.println("product(weights,weights_index,lambda)");
+					// System.out.println(Arrays.deepToString(product(weights,weights_index,lambda)));
+					// System.out.println("\n\n\n");
 					
 					
 					lambda2.add(product(weights,weights_index,lambda));
