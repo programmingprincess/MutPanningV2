@@ -1376,11 +1376,11 @@ public class ComputeSignificance {
 					//jiaqi jiaqiiiii
 					for (int i=0;i<lambda_count.size();i++){
 						System.out.println("Lambda: " + String(i));
-						System.out.println("lambda_count.get(i)[0]")
+						System.out.println("lambda_count.get(i)[0]");
 						System.out.println(lambda_count.get(i)[0]);
-						System.out.println("lambda_count.get(i)[1]")
+						System.out.println("lambda_count.get(i)[1]");
 						System.out.println(lambda_count.get(i)[1]);
-						System.out.println("\n\n\n")
+						System.out.println("\n\n\n");
 
 						sum_local+=Math.pow(lambda_count.get(i)[0],2);
 						if(sum_local/sum_sq>0.99){
