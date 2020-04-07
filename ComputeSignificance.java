@@ -1379,17 +1379,6 @@ public class ComputeSignificance {
 							System.out.println("lambda_count.get(i)[1]");
 							System.out.println(lambda_count.get(i)[1]);
 							System.out.println("\n\n\n");
-
-							sum_local+=Math.pow(lambda_count.get(i)[0],2);
-							if(sum_local/sum_sq>0.99){
-									break;
-							}
-							fraction_high+=lambda_count.get(i)[0]/sum_lambda;
-							//lambda_high.add(lambda2.get(i));
-							lambda_high_n++;
-							if(lambda_high_n>50000){
-								return 1;
-							}
 						}
 							
 					} //end of entities for loop 					
