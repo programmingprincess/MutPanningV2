@@ -2961,7 +2961,7 @@ public class ComputeSignificance {
 					
 					System.out.println("Jiaqi: Not valid");
 					System.out.println("product(weights,weights_index,lambda)");
-					System.out.println(Arrays.toString(product(weights,weights_index,lambda)));
+					System.out.println(Arrays.deepToString(product(weights,weights_index,lambda)));
 					System.out.println("\n\n\n");
 					
 					
@@ -3000,8 +3000,6 @@ public class ComputeSignificance {
 		double[][] z=new double[x.length][y[0].length];
 		for (int i=0;i<x.length;i++){
 			for (int j=0;j<y[0].length;j++){
-				
-				
 				for (int k=0;k<index[i].size();k++){
 					z[i][j]+=x[i][index[i].get(k)]*y[index[i].get(k)][j];
 				}
