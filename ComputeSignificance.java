@@ -54,8 +54,7 @@ import jdistlib.math.Bessel;
 public class ComputeSignificance {
 	static ArrayList<double[][][]> lambda_context=new ArrayList<double[][][]>();
 	static ArrayList<double[][]> lambda_type=new ArrayList<double[][]>();
-	//static String[] chr={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"};
-	static String[] chr={"22"};
+	static String[] chr={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"};
 	
 	static double[][][] lambda_context_product6_weight=null;
 	
@@ -646,9 +645,13 @@ public class ComputeSignificance {
 			
 			
 			System.out.println("START");
-			for (int i=0;i<chr.length;i++){
-				run(i);
-			}
+
+			// TODO: edit for chr 22 only 
+			// limiting to chr 22 jiaqi 
+			run("22");
+			// for (int i=0;i<chr.length;i++){
+			// 	run(i);
+			// }
 			
 			
 			
