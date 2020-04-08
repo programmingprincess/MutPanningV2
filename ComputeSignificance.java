@@ -1282,7 +1282,7 @@ public class ComputeSignificance {
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 							}
 
-							System.out.printf("Lambda: %d%n", i);
+							System.out.printf("Lambda: %d%n", jj);
 							System.out.println("x");
 							System.out.println(x);
 							System.out.println("index_gene2.get(jj)[0]");
