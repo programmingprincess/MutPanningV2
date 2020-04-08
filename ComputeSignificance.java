@@ -1002,6 +1002,8 @@ public class ComputeSignificance {
 			System.out.println("Running chr: " + chr[c]);
 
 			nucl_context=new ArrayList<StringBuilder>();
+			final_pos= new ArrayList<Integer>();
+			final_lambda_count= new ArrayList<Double>();
 
 			pos=new ArrayList<Integer>();
 			nucl=new ArrayList<String>();
