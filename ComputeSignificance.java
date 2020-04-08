@@ -58,6 +58,8 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 	
+	static ArrayList<String> nucl_context=null;
+
 	static ArrayList<Integer> pos=null;
 	static ArrayList<String> nucl=null;
 	static ArrayList<Integer> nucl_index=null;
@@ -997,7 +999,8 @@ public class ComputeSignificance {
 		public static void run(int c){
 			System.out.println("Running chr: " + chr[c]);
 
-			
+			nucl_context=new ArrayList<String>();
+
 			pos=new ArrayList<Integer>();
 			nucl=new ArrayList<String>();
 			nucl_index=new ArrayList<Integer>();
@@ -1060,6 +1063,8 @@ public class ComputeSignificance {
 				for (int nn=0;nn<genes[c].size();nn++){
 					
 					int ii=0;
+
+					//increment until pos2 is inside gene??
 					if(pos2.size()>0){
 						while(ii<pos2.size()&&pos2.get(ii)<genes[c].get(nn).start){
 							ii++;
@@ -1261,6 +1266,7 @@ public class ComputeSignificance {
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
 							//valid...index+=  (weird number)
+							//
 							if(lambda2.get(index_gene2.get(jj)[0]).length==1){
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
@@ -1271,9 +1277,18 @@ public class ComputeSignificance {
 								}
 							}
 							//calculated!! (product XYZ, has 2x3 array)
+							//NOT "valid", so needed to be calculated in update_10_10
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 							}
+
+							System.out.printf("Lambda: %d%n", i);
+							System.out.println("x");
+							System.out.println(x);
+							System.out.println("index_gene2.get(jj)[0]");
+							System.out.println(index_gene2.get(jj)[0]);
+							System.out.println("\n\n\n");
+
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
 
@@ -1372,14 +1387,17 @@ public class ComputeSignificance {
 						} //end else of cov check 
 
 						//jiaqi jiaqiiiii
-						for (int i=0;i<lambda_count.size();i++){
-							System.out.printf("Lambda: %d%n", i);
-							System.out.println("lambda_count.get(i)[0]");
-							System.out.println(lambda_count.get(i)[0]);
-							System.out.println("lambda_count.get(i)[1]");
-							System.out.println(lambda_count.get(i)[1]);
-							System.out.println("\n\n\n");
-						}
+						//resume here!!!!!
+						//todo: what is [1]? 
+						//			how to correlate this lambda value with the POSition??
+						// for (int i=0;i<lambda_count.size();i++){
+						// 	System.out.printf("Lambda: %d%n", i);
+						// 	System.out.println("lambda_count.get(i)[0]");
+						// 	System.out.println(lambda_count.get(i)[0]);
+						// 	System.out.println("lambda_count.get(i)[1]");
+						// 	System.out.println(lambda_count.get(i)[1]);
+						// 	System.out.println("\n\n\n");
+						// }
 							
 					} //end of entities for loop 					
 					
@@ -1956,17 +1974,12 @@ public class ComputeSignificance {
 				s3_quick=new double[probability.size()-1][1000]; 
 				
 			}
-			
-	//		double[][] s1=new double[probability.size()-1][100]; 
-	//		double[][] s3=new double[probability.size()-1][1000]; 
+			 
 			int s1_quick_row=probability.size()-1;
 			int s3_quick_row=probability.size()-1;
 			int s1_quick_col=100;
 			int s3_quick_col=1000;
 			
-			System.out.println("jiaqi: lambda_high_n");
-			System.out.println(lambda_high_n);
-			System.out.println("\n\n");
 			
 			//int[][] count_quick=new int[s1_quick_col][lambda_high_n];
 			if(lambda_high_n>20000){
