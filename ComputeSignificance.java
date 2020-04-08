@@ -59,6 +59,8 @@ public class ComputeSignificance {
 	static double[][][] lambda_context_product6_weight=null;
 	
 	static ArrayList<StringBuilder> nucl_context=null;
+	static ArrayList<Integer> final_pos=null;
+	static ArrayList<Double> final_lambda_count=null;
 
 	static ArrayList<Integer> pos=null;
 	static ArrayList<String> nucl=null;
@@ -1241,16 +1243,16 @@ public class ComputeSignificance {
 						if(coverage2.get(i)>=0.05){//0.3
 							for (int j=0;j<3;j++){
 								if(label2.get(i)[j]!=0){
-									index_gene2.add(new int[]{i,j});
+									index_gene2.add(new int[]{i,j,pos2.get(i)});
 								}
 								else{
-									index_gene_syn2.add(new int[]{i,j});
+									index_gene_syn2.add(new int[]{i,j, pos2.get(i)});
 								}
 							}
 							
 							
 						}
-					}
+					} //end of pos2 loop 
 
 					boolean is_or=false;
 					if(genes[c].get(nn).name.length()>2&&genes[c].get(nn).name.substring(0, 2).equals("OR")&&contains(genes[c].get(nn).name.substring(2,3),numbers)){//&&genes[i].get(j).ell_s>0.0
@@ -1282,16 +1284,18 @@ public class ComputeSignificance {
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 							}
 							//jiaqi jiaqiiiii
-
-							// System.out.printf("Lambda: %d%n", jj);
-							// System.out.println("x");
-							// System.out.println(x);
-							// System.out.println("index_gene2.get(jj)[0]");
-							// System.out.println(index_gene2.get(jj)[0]);
-							// System.out.println("\n\n\n");
-
+							final_lambda_count.add(x);
+							// [2] is a value added to hold pos2
+							final_pos.add(index_gene2.get(jj)[2]);
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
+							System.out.printf("Lambda: %d%n", jj);
+							System.out.println("final_lambda_count vs. x");
+							System.out.println(final_lambda_count.get(jj));
+							System.out.println(x);
+							System.out.println("index_gene2.get(jj)[2]");
+							System.out.println(index_gene2.get(jj)[2]);
+							System.out.println("\n\n\n");
 
 						}
 						Collections.sort(lambda_count,comppp);
@@ -2664,14 +2668,14 @@ public class ComputeSignificance {
 			}
 
 			//jiaqiiii
-			for(int i =0; i < pos2.size(); i++) {
-				System.out.printf("pos2: %d%n", i);
-				System.out.println("a[0] (count)");
-				System.out.println(pos2.get(i)[0]);
-				System.out.println("a[1] lambda");
-				System.out.println(pos2.get(i)[1]);
-				System.out.println("\n\n\n");
-			}
+			// for(int i =0; i < pos2.size(); i++) {
+			// 	System.out.printf("pos2: %d%n", i);
+			// 	System.out.println("a[0] (count)");
+			// 	System.out.println(pos2.get(i)[0]);
+			// 	System.out.println("a[1] lambda");
+			// 	System.out.println(pos2.get(i)[1]);
+			// 	System.out.println("\n\n\n");
+			// }
 			return pos2;
 		
 		} //end of summarize 
