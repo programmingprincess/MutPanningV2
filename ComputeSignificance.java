@@ -2665,6 +2665,7 @@ public class ComputeSignificance {
 
 			//jiaqiiii
 			for(int i =0; i < pos2.size(); i++) {
+				a=pos2.get(i);
 				System.out.printf("pos2: %d%n", i);
 				System.out.println("a[0] (count)");
 				System.out.println(a[0]);
