@@ -1281,13 +1281,14 @@ public class ComputeSignificance {
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 							}
+							//jiaqi jiaqiiiii
 
-							System.out.printf("Lambda: %d%n", jj);
-							System.out.println("x");
-							System.out.println(x);
-							System.out.println("index_gene2.get(jj)[0]");
-							System.out.println(index_gene2.get(jj)[0]);
-							System.out.println("\n\n\n");
+							// System.out.printf("Lambda: %d%n", jj);
+							// System.out.println("x");
+							// System.out.println(x);
+							// System.out.println("index_gene2.get(jj)[0]");
+							// System.out.println(index_gene2.get(jj)[0]);
+							// System.out.println("\n\n\n");
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
@@ -1386,7 +1387,7 @@ public class ComputeSignificance {
 								
 						} //end else of cov check 
 
-						//jiaqi jiaqiiiii
+						
 						//resume here!!!!!
 						//todo: what is [1]? 
 						//			how to correlate this lambda value with the POSition??
@@ -2658,11 +2659,22 @@ public class ComputeSignificance {
 						taken[ii+j]=true;
 					}
 				}
+
 				pos2.add(a);
+			}
+
+			//jiaqiiii
+			for(int i =0; i < pos2.size(); i++) {
+				System.out.printf("pos2: %d%n", i);
+				System.out.println("a[0] (count)");
+				System.out.println(a[0]);
+				System.out.println("a[1] lambda");
+				System.out.println(a[1]);
+				System.out.println("\n\n\n");
 			}
 			return pos2;
 		
-		}
+		} //end of summarize 
 		
 		public static ArrayList<double[]> summarize(ArrayList<double[]> pos, ArrayList<String> aa){
 			boolean[] taken=new boolean[pos.size()];
@@ -2723,6 +2735,10 @@ public class ComputeSignificance {
 
 				boolean valid=true;
 				int index=0;
+
+				//jiaqi jiaqiiiii
+				StringBuilder temp_context = new StringBuilder(); 
+
 				if(nucl.get(50).equals("C")||nucl.get(50).equals("T")){
 					int n=1;
 
@@ -2733,6 +2749,8 @@ public class ComputeSignificance {
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*nucl_index.get(50+j);
 							n*=4;
+
+							temp_context.append(nucl.get(50+j));
 						}
 						else{
 							valid=false;
@@ -2745,6 +2763,8 @@ public class ComputeSignificance {
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*nucl_index.get(50+j);
 							n*=4;
+
+							temp_context.append(nucl.get(50+j));
 						}
 						else{
 							valid=false;
@@ -2762,6 +2782,8 @@ public class ComputeSignificance {
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*(3-nucl_index.get(50+j));
 							n*=4;
+
+							temp_context.append(nucl.get(50+j));
 						}
 						else{
 							valid=false;
@@ -2769,12 +2791,14 @@ public class ComputeSignificance {
 						
 					}
 
-					// -1   -2   -3   -2   -1
+					// -1   -2   -3   -4   -5
 					// 49   48   47   46   45
 					for (int j=-1;j>=-5;j--){
 						if(pos.get(50)+j==pos.get(50+j)&&nucl_index.get(50+j)!=-1){
 							index+=n*(3-nucl_index.get(50+j));
 							n*=4;
+
+							temp_context.append(nucl.get(50+j));
 						}
 						else{
 							valid=false;
@@ -2788,6 +2812,8 @@ public class ComputeSignificance {
 				label2.add(label.get(50));
 				count2.add(count.get(50));
 				amino_acid2.add(amino_acid.get(50));
+
+				
 				
 				if (valid){
 					// System.out.println("Jiaqi: Valid");
@@ -2795,6 +2821,7 @@ public class ComputeSignificance {
 					// System.out.println("\n\n\n");
 
 					lambda2.add(new double[][]{{index}});
+					nucl_context.add(temp_context);
 				
 				}
 				else {
@@ -2809,12 +2836,17 @@ public class ComputeSignificance {
 							lambda[i][0]*=lambda_type.get(i)[0][1];
 							lambda[i][1]*=lambda_type.get(i)[0][1];
 							lambda[i][2]*=lambda_type.get(i)[0][1];
+
+							// -1   -2   -3   -4   -5
+							// 49   48   47   46   45
 							for (int j=-1;j>=-5;j--){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt1.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[9-j][tt1[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2822,12 +2854,16 @@ public class ComputeSignificance {
 									break;
 								}
 							}
+							// 1    2    3    4    5
+							// 51   52   53   54   55
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt1.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10-j][tt1[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2851,12 +2887,16 @@ public class ComputeSignificance {
 							lambda[i][1]*=lambda_type.get(i)[0][0];
 							lambda[i][2]*=lambda_type.get(i)[0][0];
 							
+							// -1   -2   -3   -4   -5
+							// 49   48   47   46   45
 							for (int j=-1;j>=-5;j--){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt2.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10+j][tt2[k]][nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2864,12 +2904,16 @@ public class ComputeSignificance {
 									break;
 								}
 							}
+							// 1    2    3    4    5
+							// 51   52   53   54   55
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt2.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[9+j][tt2[k]][nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2889,12 +2933,16 @@ public class ComputeSignificance {
 							lambda[i][1]*=lambda_type.get(i)[0][0];
 							lambda[i][2]*=lambda_type.get(i)[0][0];
 							
+							// -1   -2   -3   -4   -5
+							// 49   48   47   46   45
 							for (int j=-1;j>=-5;j--){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt2.length;k++){		
 											lambda[i][k]*=lambda_context.get(i)[9-j][tt2[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2902,12 +2950,16 @@ public class ComputeSignificance {
 									break;	
 								}
 							}
+							// 1    2    3    4    5
+							// 51   52   53   54   55
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt2.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10-j][tt2[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2928,13 +2980,16 @@ public class ComputeSignificance {
 							lambda[i][1]*=lambda_type.get(i)[0][1];
 							lambda[i][2]*=lambda_type.get(i)[0][1];
 							
-							
+							// -1   -2   -3   -4   -5
+							// 49   48   47   46   45
 							for (int j=-1;j>=-5;j--){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt1.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10+j][tt1[k]][nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2942,12 +2997,16 @@ public class ComputeSignificance {
 									break;
 								}
 							}
+							// 1    2    3    4    5
+							// 51   52   53   54   55
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
 										for (int k=0;k<tt1.length;k++){	
 											lambda[i][k]*=lambda_context.get(i)[9+j][tt1[k]][nucl_index(nucl.get(50+j))];
 											//x++;
+
+											temp_context.append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2973,7 +3032,7 @@ public class ComputeSignificance {
 					
 					
 					lambda2.add(product(weights,weights_index,lambda));
-					
+					nucl_context.add(temp_context);
 					
 				} //end of ELSE for not valid 
 
