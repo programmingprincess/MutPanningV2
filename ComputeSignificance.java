@@ -999,7 +999,7 @@ public class ComputeSignificance {
 		public static void run(int c){
 			System.out.println("Running chr: " + chr[c]);
 
-			nucl_context=new ArrayList<String>();
+			nucl_context=new ArrayList<StringBuilder>();
 
 			pos=new ArrayList<Integer>();
 			nucl=new ArrayList<String>();
@@ -2665,12 +2665,11 @@ public class ComputeSignificance {
 
 			//jiaqiiii
 			for(int i =0; i < pos2.size(); i++) {
-				a=pos2.get(i);
 				System.out.printf("pos2: %d%n", i);
 				System.out.println("a[0] (count)");
-				System.out.println(a[0]);
+				System.out.println(pos2.get(i)[0]);
 				System.out.println("a[1] lambda");
-				System.out.println(a[1]);
+				System.out.println(pos2.get(i)[1]);
 				System.out.println("\n\n\n");
 			}
 			return pos2;
