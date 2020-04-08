@@ -58,7 +58,7 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 	
-	static ArrayList<String> nucl_context=null;
+	static ArrayList<StringBuilder> nucl_context=null;
 
 	static ArrayList<Integer> pos=null;
 	static ArrayList<String> nucl=null;
