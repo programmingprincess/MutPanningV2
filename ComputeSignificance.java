@@ -58,7 +58,7 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 	
-	static ArrayList<StringBuilder> nucl_context=null;
+	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
 	static ArrayList<Double> final_lambda_count=null;
 
@@ -433,6 +433,7 @@ public class ComputeSignificance {
 			}
 			
 			System.out.println("Step2	"+System.currentTimeMillis());
+			// pow 10 because they are using 10 spots only...??? not 20?
 			lambda_context_product6_weight=new double[weights.length][6][(int)(Math.pow(4, 10))];
 			
 			for (int k=0;k<6;k++){
@@ -1001,7 +1002,7 @@ public class ComputeSignificance {
 		public static void run(int c){
 			System.out.println("Running chr: " + chr[c]);
 
-			nucl_context=new ArrayList<StringBuilder>();
+			nucl_context=new ArrayList<StringBuilder[][]>();
 			final_pos= new ArrayList<Integer>();
 			final_lambda_count= new ArrayList<Double>();
 
@@ -1087,6 +1088,8 @@ public class ComputeSignificance {
 							count2.remove(i);
 							label2.remove(i);
 							amino_acid2.remove(i);
+
+							nucl_context.remove(i);
 						}
 					}
 					
@@ -1223,6 +1226,10 @@ public class ComputeSignificance {
 					ArrayList<int[]> index_gene_syn=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene2=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene_syn2=new ArrayList<int[]>();
+
+					// Tried to get nucleotide contexts this way but too complicated...may just do position+hg19
+					// ArrayList<StringBuilder[]> index_gene2_contexts = new ArrayList<StringBuilder>();
+					// ArrayList<StringBuilder[]> index_gene2_contexts_syn = new ArrayList<StringBuilder>();
 					
 					for (int i=0;i<pos2.size();i++){
 						if(!genes[c].get(nn).contains(pos2.get(i))){
@@ -1234,6 +1241,8 @@ public class ComputeSignificance {
 								if(label2.get(i)[j]==1){
 									index_gene.add(new int[]{i,j});
 									//aa_gene.add(amino_acid2.get(i));
+
+									
 								}
 								else if(label2.get(i)[j]==0){
 									index_gene_syn.add(new int[]{i,j});
@@ -1246,9 +1255,17 @@ public class ComputeSignificance {
 							for (int j=0;j<3;j++){
 								if(label2.get(i)[j]!=0){
 									index_gene2.add(new int[]{i,j,pos2.get(i)});
+
+									//not a 3x1 matrix...need to record the type, still
+									// if(nucl_context.get(i).length()==1) {
+									// 	index_gene2_contexts.add(new StringBuilder[]{nucl_context.get(i),});
+									// }
+										
 								}
 								else{
-									index_gene_syn2.add(new int[]{i,j, pos2.get(i)});
+									index_gene_syn2.add(new int[]{i,j,pos2.get(i)});
+
+									// index_gene2_contexts_syn.add(nucl_context.get(i));
 								}
 							}
 							
@@ -1265,41 +1282,52 @@ public class ComputeSignificance {
 
 
 						//index_gene2: [0] is the position 
-						// 						 [1] refers to TYPE change (i.e., SYN/NS/NC?? depending on subs. type)
+						// 						 [1] refers to subs TYPE change (index for tt1, tt2)
+						// 
  						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
+
+							System.out.printf("Lambda: %d%n", jj);
+
+							System.out.println("(TYPE) tt2[index_gene2.get(jj)[1]]");
 							//valid...index+=  (weird number)
-							//
 							if(lambda2.get(index_gene2.get(jj)[0]).length==1){
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
 									x=lambda_context_product6_weight[k][tt2[index_gene2.get(jj)[1]]][iii];
+									System.out.println(tt2[index_gene2.get(jj)[1]]);
 								}
 								else {
 									x=lambda_context_product6_weight[k][tt1[index_gene2.get(jj)[1]]][iii];
+									System.out.println(tt1[index_gene2.get(jj)[1]]);
 								}
 							}
 							//calculated!! (product XYZ, has 2x3 array)
 							//NOT "valid", so needed to be calculated in update_10_10
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
+								System.out.printf("Unknown: %d%n", index_gene2.get(jj)[1]);
 							}
 							//jiaqi jiaqiiiii
 							final_lambda_count.add(x);
+
 							// [2] is a value added to hold pos2
 							final_pos.add(index_gene2.get(jj)[2]);
+
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
-							System.out.printf("Lambda: %d%n", jj);
-							System.out.println("final_lambda_count vs. x");
-							System.out.println(final_lambda_count.get(jj));
+							// System.out.println(final_lambda_count.get(jj));
+							System.out.println("final_lambda_count: x");
 							System.out.println(x);
-							System.out.println("index_gene2.get(jj)[2]");
+							
+							
+							System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+							System.out.println(c+"_"+index_gene2.get(jj)[2]);
 							System.out.println(index_gene2.get(jj)[2]);
 							System.out.println("\n\n\n");
 
-						}
+						} //end of jj index_gene2 loop 
 						Collections.sort(lambda_count,comppp);
 						
 						ArrayList<double[]> lambda_count_syn=new ArrayList<double[]>();
@@ -2726,7 +2754,7 @@ public class ComputeSignificance {
 		
 		
 		
-		
+		//ttt={0,1,2,0,2,1};
 		static int[] tt1={3,5,4};
 		static int[] tt2={0,1,2};
 		static int offset_left=10;
@@ -2776,6 +2804,7 @@ public class ComputeSignificance {
 							valid=false;
 						}
 					}
+					temp_context.append("_CT");
 				} //end of nucl = C, T
 
 				//reverse strand 
@@ -2796,7 +2825,6 @@ public class ComputeSignificance {
 						}
 						
 					}
-
 					// -1   -2   -3   -4   -5
 					// 49   48   47   46   45
 					for (int j=-1;j>=-5;j--){
@@ -2810,8 +2838,10 @@ public class ComputeSignificance {
 							valid=false;
 						}
 					}
+					temp_context.append("_AG");
 				} //end of nucl = A, G 
 				
+
 				pos2.add(pos.get(50));
 				nucl2.add(nucl.get(50));
 				coverage2.add(coverage.get(50));
@@ -2819,7 +2849,8 @@ public class ComputeSignificance {
 				count2.add(count.get(50));
 				amino_acid2.add(amino_acid.get(50));
 
-				
+				// move to end of valid statement because invalid positions are caluculated later
+				//nucl_context.add(temp_context);				
 				
 				if (valid){
 					// System.out.println("Jiaqi: Valid");
@@ -2827,12 +2858,14 @@ public class ComputeSignificance {
 					// System.out.println("\n\n\n");
 
 					lambda2.add(new double[][]{{index}});
-					nucl_context.add(temp_context);
+					nucl_context.add(new StringBuilder[][]{{temp_context}});
 				
 				}
 				else {
 					double[][] lambda=new double[lambda_context.size()][3];
+					StringBuilder[][] temp_context_type=new StringBuilder[lambda_context.size()][3];
 					
+
 					if(nucl.get(50).equals("A")){
 						for (int i=0;i<lambda.length;i++){
 							lambda[i][0]=lambda_type.get(i)[1][0];
@@ -2845,6 +2878,10 @@ public class ComputeSignificance {
 
 							// -1   -2   -3   -4   -5
 							// 49   48   47   46   45
+
+							// lambda context (9-j)
+							// 10   11   12   13   14 
+
 							for (int j=-1;j>=-5;j--){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
@@ -2852,7 +2889,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[9-j][tt1[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2860,16 +2897,22 @@ public class ComputeSignificance {
 									break;
 								}
 							}
+							// 50 + j
 							// 1    2    3    4    5
 							// 51   52   53   54   55
+
+							// lambda context (10-j)
+							// 9    8    7    6    5
+
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
+										temp_context.append(nucl.get(50+j));
 										for (int k=0;k<tt1.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10-j][tt1[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2878,7 +2921,9 @@ public class ComputeSignificance {
 								}		
 							}
 						}
+						temp_context[i][k].append("_A");
 					} //end of nucl=A
+
 					else if(nucl.get(50).equals("C")){
 
 						// TODO 
@@ -2902,7 +2947,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[10+j][tt2[k]][nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2919,7 +2964,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[9+j][tt2[k]][nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2928,7 +2973,10 @@ public class ComputeSignificance {
 								}
 							}
 						}
-					}
+						temp_context[i][k].append("_C");
+					} //end of C
+
+
 					else if(nucl.get(50).equals("G")){
 						for (int i=0;i<lambda.length;i++){
 							lambda[i][0]=lambda_type.get(i)[1][0];
@@ -2948,7 +2996,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[9-j][tt2[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2965,7 +3013,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[10-j][tt2[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -2975,7 +3023,9 @@ public class ComputeSignificance {
 								
 							}
 						}
-					}
+
+						temp_context[i][k].append("_G");
+					} // end of G 
 					else if(nucl.get(50).equals("T")){
 						for (int i=0;i<lambda.length;i++){
 							lambda[i][0]=lambda_type.get(i)[1][0];
@@ -2995,7 +3045,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[10+j][tt1[k]][nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -3012,7 +3062,7 @@ public class ComputeSignificance {
 											lambda[i][k]*=lambda_context.get(i)[9+j][tt1[k]][nucl_index(nucl.get(50+j))];
 											//x++;
 
-											temp_context.append(nucl.get(50+j));
+											temp_context[i][k].append(nucl.get(50+j));
 										}
 									}
 								}
@@ -3022,7 +3072,8 @@ public class ComputeSignificance {
 							}
 							
 						}
-					}
+						temp_context[i][k].append("_T");
+					} //end of T 
 					for (int k=0;k<lambda.length;k++){
 						for (int l=0;l<lambda[k].length;l++){
 							if(lambda[k][l]>1000){
@@ -3036,9 +3087,8 @@ public class ComputeSignificance {
 					// System.out.println(Arrays.deepToString(product(weights,weights_index,lambda)));
 					// System.out.println("\n\n\n");
 					
-					
-					lambda2.add(product(weights,weights_index,lambda));
 					nucl_context.add(temp_context);
+					lambda2.add(product(weights,weights_index,lambda));
 					
 				} //end of ELSE for not valid 
 
