@@ -1232,6 +1232,7 @@ public class ComputeSignificance {
 					// ArrayList<StringBuilder[]> index_gene2_contexts = new ArrayList<StringBuilder>();
 					// ArrayList<StringBuilder[]> index_gene2_contexts_syn = new ArrayList<StringBuilder>();
 					
+					// loop each position 3 times...for the type of change (>A, >G, >C, >T)? 
 					for (int i=0;i<pos2.size();i++){
 						if(!genes[c].get(nn).contains(pos2.get(i))){
 							continue;
@@ -1285,6 +1286,10 @@ public class ComputeSignificance {
 						//index_gene2: [0] is the position 
 						// 						 [1] refers to subs TYPE change (index for tt1, tt2)
 						// 
+
+						//lambda_count holds all POSSIBLE nonsyn mutations per position (out of 3)
+						//lambda_count_syn holds all possilbe sny mutations 
+						//TODO: can we add all lambdas per position to get full context value?
  						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
@@ -1337,8 +1342,8 @@ public class ComputeSignificance {
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
 							// System.out.println(final_lambda_count.get(jj));
-							System.out.println("final_lambda_count: x");
-							System.out.println(x);
+							System.out.println("count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]");
+							System.out.println(count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]);
 							
 							
 							// System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
@@ -1439,19 +1444,6 @@ public class ComputeSignificance {
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								
 						} //end else of cov check 
-
-						
-						//resume here!!!!!
-						//todo: what is [1]? 
-						//			how to correlate this lambda value with the POSition??
-						// for (int i=0;i<lambda_count.size();i++){
-						// 	System.out.printf("Lambda: %d%n", i);
-						// 	System.out.println("lambda_count.get(i)[0]");
-						// 	System.out.println(lambda_count.get(i)[0]);
-						// 	System.out.println("lambda_count.get(i)[1]");
-						// 	System.out.println(lambda_count.get(i)[1]);
-						// 	System.out.println("\n\n\n");
-						// }
 							
 					} //end of entities for loop 					
 					
@@ -1610,6 +1602,7 @@ public class ComputeSignificance {
 			double fraction_high=0;
 			ArrayList<Double> lambda_high=new ArrayList<Double>();
 			{
+				//k_high evidence
 				int k=2;
 				double sum_local=0;
 				for (int i=0;i<lambda_count.size();i++){
