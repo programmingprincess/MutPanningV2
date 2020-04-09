@@ -60,6 +60,7 @@ public class ComputeSignificance {
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
+	static ArrayList<String> final_chr_pos = null;
 	static ArrayList<Double> final_lambda_count=null;
 
 	static ArrayList<Integer> pos=null;
@@ -370,7 +371,6 @@ public class ComputeSignificance {
 			}
 			output.newLine();
 
-			ArrayList<int[][][]> cluster_affinity=new ArrayList<int[][][]>();
 			for (int i=0;i<lambda_context.size();i++){
 				output.write(i+"");
 				for (int j=0;j<lambda_context.get(i).length;j++){
@@ -1004,6 +1004,7 @@ public class ComputeSignificance {
 
 			nucl_context=new ArrayList<StringBuilder[][]>();
 			final_pos= new ArrayList<Integer>();
+			final_chr_pos = new ArrayList<String>();
 			final_lambda_count= new ArrayList<Double>();
 
 			pos=new ArrayList<Integer>();
@@ -1293,14 +1294,25 @@ public class ComputeSignificance {
 							System.out.println("(TYPE) tt2[index_gene2.get(jj)[1]]");
 							//valid...index+=  (weird number)
 							if(lambda2.get(index_gene2.get(jj)[0]).length==1){
+
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
 									x=lambda_context_product6_weight[k][tt2[index_gene2.get(jj)[1]]][iii];
+									System.out.println("final_lambda_count: x");
+									System.out.println(x);
 									System.out.println(tt2[index_gene2.get(jj)[1]]);
+									System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+									System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
+									
 								}
 								else {
 									x=lambda_context_product6_weight[k][tt1[index_gene2.get(jj)[1]]][iii];
+
+									System.out.println("final_lambda_count: x");
+									System.out.println(x);
 									System.out.println(tt1[index_gene2.get(jj)[1]]);
+									System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+									System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
 								}
 							}
 							//calculated!! (product XYZ, has 2x3 array)
@@ -1308,12 +1320,19 @@ public class ComputeSignificance {
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 								System.out.printf("Unknown: %d%n", index_gene2.get(jj)[1]);
+
+								System.out.println("final_lambda_count: x");
+								System.out.println(x);
+								System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+								System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
 							}
-							//jiaqi jiaqiiiii
+
+							//the final lambda values, with position same as final_pos! 
 							final_lambda_count.add(x);
 
 							// [2] is a value added to hold pos2
 							final_pos.add(index_gene2.get(jj)[2]);
+							final_chr_pos.add(chr[c]+"_"+index_gene2.get(jj)[2])
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
@@ -1322,9 +1341,9 @@ public class ComputeSignificance {
 							System.out.println(x);
 							
 							
-							System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-							System.out.println(c+"_"+index_gene2.get(jj)[2]);
-							System.out.println(index_gene2.get(jj)[2]);
+							// System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+							// System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
+							// System.out.println(index_gene2.get(jj)[2]);
 							System.out.println("\n\n\n");
 
 						} //end of jj index_gene2 loop 
