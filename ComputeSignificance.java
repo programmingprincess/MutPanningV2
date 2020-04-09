@@ -1332,7 +1332,7 @@ public class ComputeSignificance {
 
 							// [2] is a value added to hold pos2
 							final_pos.add(index_gene2.get(jj)[2]);
-							final_chr_pos.add(chr[c]+"_"+index_gene2.get(jj)[2])
+							final_chr_pos.add(chr[c]+"_"+index_gene2.get(jj)[2]);
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
