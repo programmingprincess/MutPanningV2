@@ -2906,7 +2906,7 @@ public class ComputeSignificance {
 							for (int j=1;j<=5;j++){
 								if(pos.get(50)+j==pos.get(50+j)){
 									if(nucl_index(nucl.get(50+j))!=-1){
-										temp_context.append(nucl.get(50+j));
+										//temp_context.append(nucl.get(50+j));
 										for (int k=0;k<tt1.length;k++){
 											lambda[i][k]*=lambda_context.get(i)[10-j][tt1[k]][3-nucl_index(nucl.get(50+j))];
 											//x++;
