@@ -1294,7 +1294,7 @@ public class ComputeSignificance {
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
 
-							System.out.printf("Lambda: %d%n", jj);
+							System.out.printf("Counter: %d%n", jj);
 
 							System.out.println("(TYPE) tt2[index_gene2.get(jj)[1]]");
 							//valid...index+=  (weird number)
@@ -1303,21 +1303,11 @@ public class ComputeSignificance {
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
 									x=lambda_context_product6_weight[k][tt2[index_gene2.get(jj)[1]]][iii];
-									System.out.println("final_lambda_count: x");
-									System.out.println(x);
 									System.out.println(tt2[index_gene2.get(jj)[1]]);
-									System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-									System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
-									
 								}
 								else {
 									x=lambda_context_product6_weight[k][tt1[index_gene2.get(jj)[1]]][iii];
-
-									System.out.println("final_lambda_count: x");
-									System.out.println(x);
 									System.out.println(tt1[index_gene2.get(jj)[1]]);
-									System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-									System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
 								}
 							}
 							//calculated!! (product XYZ, has 2x3 array)
@@ -1325,11 +1315,6 @@ public class ComputeSignificance {
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
 								System.out.printf("Unknown: %d%n", index_gene2.get(jj)[1]);
-
-								System.out.println("final_lambda_count: x");
-								System.out.println(x);
-								System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-								System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
 							}
 
 							//the final lambda values, with position same as final_pos! 
@@ -1341,14 +1326,11 @@ public class ComputeSignificance {
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 
-							// System.out.println(final_lambda_count.get(jj));
-							System.out.println("count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]");
-							System.out.println(count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]);
-							
-							
-							// System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-							// System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
-							// System.out.println(index_gene2.get(jj)[2]);
+							System.out.println("(LAMBDA) final_lambda_count: x");
+							System.out.println(x);
+							System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
+							System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
+					
 							System.out.println("\n\n\n");
 
 						} //end of jj index_gene2 loop 
