@@ -1398,12 +1398,12 @@ public class ComputeSignificance {
 				    while (it.hasNext()) {
 			        HashMap.Entry pair = (HashMap.Entry)it.next();
 			        System.out.println(pair.getKey() + " = " + Arrays.toString(pair.getValue()));
-			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
+			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue().toArray())+"\t"+sum(pair.getValue()));
 							outputee.newLine();
 						
 			        if(pair.getValue().size() != 3) {
 			        	System.out.println("Value does not add up at " + pair.getKey());
-			        	System.out.println(Arrays.toString(pair.getValue()));
+			        	System.out.println(Arrays.toString(pair.getValue().toArray()));
 			        	outputee.newLine();
 			        }
 			        it.remove(); // avoids a ConcurrentModificationException
