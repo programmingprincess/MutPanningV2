@@ -1398,7 +1398,7 @@ public class ComputeSignificance {
 						Iterator it = jw_lambdas.entrySet().iterator();
 				    while (it.hasNext()) {
 			        HashMap.Entry pair = (HashMap.Entry)it.next();
-			        String key = pair.get(key);
+			        String key = pair.getKey();
 			        StringBuilder str_value = new StringBuilder();
 							double lambda_sum = jw_lambdas.get(key).stream()
 						    .mapToDouble(a -> a)
