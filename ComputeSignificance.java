@@ -1339,7 +1339,7 @@ public class ComputeSignificance {
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new ArrayList<double>());
+								jw_lambdas.put(key, new ArrayList<Double>());
 								jw_lambdas.get(key).add(x);
 							}
 
@@ -1380,7 +1380,7 @@ public class ComputeSignificance {
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new ArrayList<double>());
+								jw_lambdas.put(key, new ArrayList<Double>());
 								jw_lambdas.get(key).add(x);
 							}
 
@@ -1396,7 +1396,7 @@ public class ComputeSignificance {
 
 						Iterator it = jw_lambdas.entrySet().iterator();
 				    while (it.hasNext()) {
-			        Map.Entry pair = (Map.Entry)it.next();
+			        HashMap.Entry pair = (HashMap.Entry)it.next();
 			        System.out.println(pair.getKey() + " = " + Arrays.toString(pair.getValue()));
 			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
 							outputee.newLine();
