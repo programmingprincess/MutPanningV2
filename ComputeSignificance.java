@@ -60,7 +60,7 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 
-	static Map<String, ArrayList<double>> jw_lambdas = null; 
+	static HashMap<String, ArrayList<double>> jw_lambdas = null; 
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
@@ -1389,26 +1389,27 @@ public class ComputeSignificance {
 						Collections.sort(lambda_count_syn,comppp);
 
 
-						out=new FileWriter(file_out_lambda);
-						output= new BufferedWriter(out);
-						output.write("position\tlambdas\tsum_lambdas");
+						FileWriter outtee=new FileWriter(file_out_lambda);
+						BufferedWriter outputee= new BufferedWriter(outtee);
+			
+						outputee.write("position\tlambdas\tsum_lambdas");
 
 						Iterator it = jw_lambdas.entrySet().iterator();
 				    while (it.hasNext()) {
 			        Map.Entry pair = (Map.Entry)it.next();
 			        System.out.println(pair.getKey() + " = " + Arrays.toString(pair.getValue()));
-			        output.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
-							output.newLine();
+			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
+							outputee.newLine();
 						
 			        if(pair.getValue().length != 3) {
 			        	System.out.println("Value does not add up at " + pair.getKey());
 			        	System.out.println(Arrays.toString(pair.getValue()));
-			        	output.newLine();
+			        	outputee.newLine();
 			        }
 			        it.remove(); // avoids a ConcurrentModificationException
 				    }
 
-				    output.close();
+				    outputee.close();
 
 						int err=3;//TODO: 3 ??
 						
