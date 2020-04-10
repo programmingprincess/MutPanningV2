@@ -60,7 +60,11 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 
-	static HashMap<String, ArrayList<Double>> jw_lambdas = null; 
+	// Hashmap PER entity, where 
+	//		Key<String> is chr_pos, and 
+	//		ArrayList<Double> contains 3 lambda values for each possible subs. type
+	static ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = null; 
+	static int pos_counter = 0;
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
@@ -179,7 +183,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
-		file_out_lambda=args[0]+"jw_final_lambdas.txt";
+		file_out_lambda=args[0]+"jw_final_lambdas";
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
@@ -1070,8 +1074,13 @@ public class ComputeSignificance {
 				FileInputStream in2=new FileInputStream(file_align+chr[c]+".txt");
 				DataInputStream inn2=new DataInputStream(in2);
 				BufferedReader input2= new BufferedReader(new InputStreamReader(inn2));
+
+
+				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 				
 				int nnn=0;
+
+				//for every gene in chromosome?
 				for (int nn=0;nn<genes[c].size();nn++){
 					
 					int ii=0;
@@ -1234,7 +1243,6 @@ public class ComputeSignificance {
 					ArrayList<int[]> index_gene2=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene_syn2=new ArrayList<int[]>();
 
-					HashMap<String, ArrayList<Double>> jw_lambdas = new HashMap<String, ArrayList<Double>>(); // Java 6
 
 					// Tried to get nucleotide contexts this way but too complicated...may just do position+hg19
 					// ArrayList<StringBuilder[]> index_gene2_contexts = new ArrayList<StringBuilder>();
@@ -1288,6 +1296,7 @@ public class ComputeSignificance {
 						is_or=true;
 					}
 						
+					//per entity, i.e., skin 
 					for (int k=0;k<entities.length;k++){
 
 
@@ -1336,12 +1345,15 @@ public class ComputeSignificance {
 							
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
-							if (jw_lambdas.containsKey(key)) {
-								jw_lambdas.get(key).add(x);
+							if (jw_lambdas.get(k).containsKey(key)) {
+								jw_lambdas.get(k).get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new ArrayList<Double>());
-								jw_lambdas.get(key).add(x);
+								jw_lambdas.get(k).put(key, new ArrayList<Double>());
+								jw_lambdas.get(k).get(key).add(x);
 							}
+
+							// make sure output file matches the number of positions recorded in the loop
+							pos_counter+=1;
 
 							System.out.println("(LAMBDA) final_lambda_count: x");
 							System.out.println(x);
@@ -1377,54 +1389,18 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
-							if (jw_lambdas.containsKey(key)) {
-								jw_lambdas.get(key).add(x);
+							if (jw_lambdas.get(k).containsKey(key)) {
+								jw_lambdas.get(k).get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new ArrayList<Double>());
-								jw_lambdas.get(key).add(x);
+								jw_lambdas.get(k).put(key, new ArrayList<Double>());
+								jw_lambdas.get(k).get(key).add(x);
 							}
+
+							pos_counter+=1;
 
 						}
 
 						Collections.sort(lambda_count_syn,comppp);
-
-
-						// output final lambda counts 
-						FileWriter outtee=new FileWriter(file_out_lambda);
-						BufferedWriter outputee= new BufferedWriter(outtee);
-			
-						outputee.write("position\tlambdas\tsum_lambdas");
-
-
-						int i = 0;
-						for (String key : jw_lambdas.keySet()) {
-						  StringBuilder str_value = new StringBuilder();
-
-
-			        for(int idx=0;idx<jw_lambdas.get(key).size(); idx++) {
-			        	str_value.append(jw_lambdas.get(key).get(idx)+", ");
-			        }
-
-			        System.out.print(key);
-			        System.out.printf("\t" +str_value+"\n");
-
-
-
-			        outputee.write(key+"\t"+str_value);
-							outputee.newLine();
-						
-			        if(jw_lambdas.get(key).size() != 3) {
-			        	System.out.println("Value does not add up at " + str_value);
-			        	System.out.println(key);
-			        	outputee.newLine();
-			        }
-
-
-						}
-
-				    outputee.close();
-
-				    //end of output 
 
 						int err=3;//TODO: 3 ??
 						
@@ -1499,13 +1475,43 @@ public class ComputeSignificance {
 							
 					} //end of entities for loop 					
 					
-				}
+				} // for each pos. in gene...
 				//compute the last mutation rates at the end of the chr until the queue empty 
 				
 				input.close();
 				input2.close();
+
+				FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+				BufferedWriter outputee= new BufferedWriter(outtee);
+				outputee.write("position\tlambdas\tsum_lambdas\n");
+
+				/// jiaqiiiiii
+				for (int k=0;k<entities.length;k++){
+					int i = 0;
+					for (String key : jw_lambdas.get(k).keySet()) {
+					  StringBuilder str_value = new StringBuilder();
+
+					  double sum=0;
+
+		        for(int idx=0;idx<jw_lambdas.get(k).get(key).size(); idx++) {
+		        	sum+=jw_lambdas.get(k).get(key).get(idx);
+		        	str_value.append(jw_lambdas.get(k).get(key).get(idx)+", ");
+		        }
+
+		        outputee.write(key+"\t"+str_value+"\t"+sum);
+						outputee.newLine();
+					
+		        if(jw_lambdas.get(k).get(key).size() != 3) {
+		        	System.out.println("Err: Value does not add up at " + str_value);
+		        	System.out.println(key);
+		        	outputee.newLine();
+		        }
+					}
+			  }
+			  outputee.close();
+			  System.out.printf("Pos_counter: %d%n", pos_counter);
 				
-			}
+			} //end of run(c) try
 			catch(Exception e){
 				StackTraceElement[] aa=e.getStackTrace();
 				for (int i=0;i<aa.length;i++){
