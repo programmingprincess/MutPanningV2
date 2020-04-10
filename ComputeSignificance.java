@@ -1497,18 +1497,25 @@ public class ComputeSignificance {
 					  StringBuilder str_value = new StringBuilder();
 
 					  double sum=0;
-
+					  
+					  // sometimes positions are counted twice (0.4% of the time)
+		        // in those cases, only sum the first 3. they are identical to the second 3
 		        for(int idx=0;idx<jw_lambdas.get(k).get(key).size(); idx++) {
-		        	sum+=jw_lambdas.get(k).get(key).get(idx);
-		        	str_value.append(jw_lambdas.get(k).get(key).get(idx)+", ");
+		        	if (idx < 3) {
+		        		sum+=jw_lambdas.get(k).get(key).get(idx);	
+		        	}
+		        		
+		        	str_value.append(jw_lambdas.get(k).get(key).get(idx)+", ");	
 		        }
 
 		        outputee.write(key+"\t"+str_value+"\t"+sum);
 						outputee.newLine();
 					
 		        if(jw_lambdas.get(k).get(key).size() != 3) {
-		        	System.out.println("Err: Value does not add up at " + str_value);
-		        	System.out.println(key);
+		        	System.out.println("Err: " + str_value);
+		        	System.out.print("Value at " key + " : size ");
+		        	System.out.printf("%d%n", jw_lambdas.get(k).get(key).size());
+		        	
 		        	outputee.newLine();
 		        }
 					}
