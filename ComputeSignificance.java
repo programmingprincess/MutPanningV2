@@ -1481,12 +1481,14 @@ public class ComputeSignificance {
 				input.close();
 				input2.close();
 
-				FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-				BufferedWriter outputee= new BufferedWriter(outtee);
-				outputee.write("position\tlambdas\tsum_lambdas\n");
+				
 
 				/// jiaqiiiiii
 				for (int k=0;k<entities.length;k++){
+					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+					BufferedWriter outputee= new BufferedWriter(outtee);
+					outputee.write("position\tlambdas\tsum_lambdas\n");
+
 					int i = 0;
 					for (String key : jw_lambdas.get(k).keySet()) {
 					  StringBuilder str_value = new StringBuilder();
@@ -1507,9 +1509,11 @@ public class ComputeSignificance {
 		        	outputee.newLine();
 		        }
 					}
+
+					outputee.close();
+			  	System.out.printf("Pos_counter: %d%n", pos_counter);
 			  }
-			  outputee.close();
-			  System.out.printf("Pos_counter: %d%n", pos_counter);
+			  
 				
 			} //end of run(c) try
 			catch(Exception e){
