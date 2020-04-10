@@ -1397,13 +1397,14 @@ public class ComputeSignificance {
 						Iterator it = jw_lambdas.entrySet().iterator();
 				    while (it.hasNext()) {
 			        HashMap.Entry pair = (HashMap.Entry)it.next();
-			        System.out.println(pair.getKey() + " = " + Arrays.toString(pair.getValue()));
-			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue().toArray())+"\t"+sum(pair.getValue()));
+			        String key = pair.get(key)
+			        System.out.println(key + " = " + Arrays.toString(jw_lambdas.get(key)));
+			        outputee.write(pair.getKey()+"\t"+Arrays.toString(jw_lambdas.get(key))+"\t"+sum(jw_lambdas.get(key)));
 							outputee.newLine();
 						
 			        if(pair.getValue().size() != 3) {
-			        	System.out.println("Value does not add up at " + pair.getKey());
-			        	System.out.println(Arrays.toString(pair.getValue().toArray()));
+			        	System.out.println("Value does not add up at " + Arrays.toString(jw_lambdas.get(key)));
+			        	System.out.println(Arrays.toString(jw_lambdas.get(key)));
 			        	outputee.newLine();
 			        }
 			        it.remove(); // avoids a ConcurrentModificationException
