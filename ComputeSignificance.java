@@ -1334,7 +1334,7 @@ public class ComputeSignificance {
 							
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
-							if jw_lambdas.containsKey(key) {
+							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
 								jw_lambdas.put(key, new ArrayList<double>());
@@ -1375,7 +1375,7 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
-							if jw_lambdas.containsKey(key) {
+							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
 								jw_lambdas.put(key, new ArrayList<double>());
