@@ -57,6 +57,8 @@ public class ComputeSignificance {
 	static String[] chr={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"};
 	
 	static double[][][] lambda_context_product6_weight=null;
+
+	static Map<String, ArrayList<double>> jw_lambdas = null; 
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
@@ -71,6 +73,8 @@ public class ComputeSignificance {
 	static ArrayList<int[][]> count=null;
 	static ArrayList<String> amino_acid=null;
 	
+
+
 	
 	
 	static String[] entities=null;
@@ -173,7 +177,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
-		file_out_lambda=args[0]+"jw_LambdaContext.txt";
+		file_out_lambda=args[0]+"jw_final_lambdas.txt";
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
@@ -354,35 +358,35 @@ public class ComputeSignificance {
 
 			FileWriter out=new FileWriter(file_out_lambda);
 			BufferedWriter output= new BufferedWriter(out);
-			output.write("ClusterID");
-			for (int i=0;i<20;i++){
-				for (int j=0;j<6;j++){
-					for (int k=0;k<4;k++){
-						int p=0;
-						if(i<10){
-							p=i-10;
-						}
-						else{
-							p=i-9;
-						}
-						output.write("	Position_"+p+"_Type_"+(j+1)+"_"+new String[]{"A","C","G","T"}[k]);
-					}
-				}
-			}
-			output.newLine();
+			// output.write("ClusterID");
+			// for (int i=0;i<20;i++){
+			// 	for (int j=0;j<6;j++){
+			// 		for (int k=0;k<4;k++){
+			// 			int p=0;
+			// 			if(i<10){
+			// 				p=i-10;
+			// 			}
+			// 			else{
+			// 				p=i-9;
+			// 			}
+			// 			output.write("	Position_"+p+"_Type_"+(j+1)+"_"+new String[]{"A","C","G","T"}[k]);
+			// 		}
+			// 	}
+			// }
+			// output.newLine();
 
-			for (int i=0;i<lambda_context.size();i++){
-				output.write(i+"");
-				for (int j=0;j<lambda_context.get(i).length;j++){
-					for (int k=0;k<lambda_context.get(i)[j].length;k++){
-						for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
-							output.write("	"+lambda_context.get(i)[j][k][l]);
-						}
-					}
-				}
-				output.newLine();
-			}
-			output.close();
+			// for (int i=0;i<lambda_context.size();i++){
+			// 	output.write(i+"");
+			// 	for (int j=0;j<lambda_context.get(i).length;j++){
+			// 		for (int k=0;k<lambda_context.get(i)[j].length;k++){
+			// 			for (int l=0;l<lambda_context.get(i)[j][k].length;l++){
+			// 				output.write("	"+lambda_context.get(i)[j][k][l]);
+			// 			}
+			// 		}
+			// 	}
+			// 	output.newLine();
+			// }
+			// output.close();
 
 			
 			
@@ -1228,6 +1232,8 @@ public class ComputeSignificance {
 					ArrayList<int[]> index_gene2=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene_syn2=new ArrayList<int[]>();
 
+					Map<String, ArrayList<Double>> jw_lambdas = new HashMap<String, ArrayList<Double>>(); // Java 6
+
 					// Tried to get nucleotide contexts this way but too complicated...may just do position+hg19
 					// ArrayList<StringBuilder[]> index_gene2_contexts = new ArrayList<StringBuilder>();
 					// ArrayList<StringBuilder[]> index_gene2_contexts_syn = new ArrayList<StringBuilder>();
@@ -1325,6 +1331,15 @@ public class ComputeSignificance {
 							final_chr_pos.add(chr[c]+"_"+index_gene2.get(jj)[2]);
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
+							
+							String key = chr[c]+"_"+index_gene2.get(jj)[2];
+
+							if jw_lambdas.containsKey(key) {
+								jw_lambdas.get(key).add(x);
+							} else {
+								jw_lambdas.put(key, new ArrayList<double>());
+								jw_lambdas.get(key).add(x);
+							}
 
 							System.out.println("(LAMBDA) final_lambda_count: x");
 							System.out.println(x);
@@ -1336,7 +1351,11 @@ public class ComputeSignificance {
 						} //end of jj index_gene2 loop 
 						Collections.sort(lambda_count,comppp);
 						
+
+						//getting synonymous mutation lambda counts 
+
 						ArrayList<double[]> lambda_count_syn=new ArrayList<double[]>();
+
 						for (int jj=0;jj<index_gene_syn2.size();jj++){
 							double x=0;
 							if(lambda2.get(index_gene_syn2.get(jj)[0]).length==1){
@@ -1353,9 +1372,42 @@ public class ComputeSignificance {
 							}
 							
 							lambda_count_syn.add(new double[]{x,count2.get(index_gene_syn2.get(jj)[0])[k][index_gene_syn2.get(jj)[1]]});//lambda22.get(index_gene_syn2.get(i)[0])[index_gene_syn2.get(i)[1]]
+
+							String key = chr[c]+"_"+index_gene2.get(jj)[2];
+
+							if jw_lambdas.containsKey(key) {
+								jw_lambdas.get(key).add(x);
+							} else {
+								jw_lambdas.put(key, new ArrayList<double>());
+								jw_lambdas.get(key).add(x);
+							}
+
 						}
+
 						Collections.sort(lambda_count_syn,comppp);
+
+
+						out=new FileWriter(file_out_lambda);
+						output= new BufferedWriter(out);
+						output.write("position\tlambdas\tsum_lambdas");
+
+						Iterator it = jw_lambdas.entrySet().iterator();
+				    while (it.hasNext()) {
+			        Map.Entry pair = (Map.Entry)it.next();
+			        System.out.println(pair.getKey() + " = " + Arrays.toString(pair.getValue()));
+			        output.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
+							output.newLine();
 						
+			        if(pair.getValue().length != 3) {
+			        	System.out.println("Value does not add up at " + pair.getKey());
+			        	System.out.println(Arrays.toString(pair.getValue()));
+			        	output.newLine();
+			        }
+			        it.remove(); // avoids a ConcurrentModificationException
+				    }
+
+				    output.close();
+
 						int err=3;//TODO: 3 ??
 						
 						//System.out.println(genes[c].get(nn).name+"	"+genes[c].get(nn).cov+"	"+genes[c].get(nn).cov_syn);
