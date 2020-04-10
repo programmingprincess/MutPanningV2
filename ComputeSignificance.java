@@ -1513,7 +1513,7 @@ public class ComputeSignificance {
 					
 		        if(jw_lambdas.get(k).get(key).size() != 3) {
 		        	System.out.println("Err: " + str_value);
-		        	System.out.print("Value at " key + " : size ");
+		        	System.out.print("Value at " +key + " : size ");
 		        	System.out.printf("%d%n", jw_lambdas.get(k).get(key).size());
 		        	
 		        	outputee.newLine();
