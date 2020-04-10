@@ -1389,6 +1389,7 @@ public class ComputeSignificance {
 						Collections.sort(lambda_count_syn,comppp);
 
 
+						// output final lambda counts 
 						FileWriter outtee=new FileWriter(file_out_lambda);
 						BufferedWriter outputee= new BufferedWriter(outtee);
 			
@@ -1399,17 +1400,21 @@ public class ComputeSignificance {
 			        HashMap.Entry pair = (HashMap.Entry)it.next();
 			        String key = pair.get(key);
 			        StringBuilder str_value = new StringBuilder();
+							double lambda_sum = jw_lambdas.get(key).stream()
+						    .mapToDouble(a -> a)
+						    .sum();
 
 			        for(int idx=0;idx<jw_lambdas.get(key).size(); idx++) {
-
 			        	str_value.append(jw_lambdas.get(key).get(idx)+", ");
-
 			        }
 
+			        System.out.print(pair.getKey());
+			        System.out.printf("\t" +str_value+"\t");
+			        System.out.printf("%d%n", lambda_sum);
 
-			        System.out.println(key + " = " + Arrays.toString(jw_lambdas.get(key)));
 
-			        outputee.write(pair.getKey()+"\t"+str_value+"\t"+sum(jw_lambdas.get(key)));
+
+			        outputee.write(pair.getKey()+"\t"+str_value+"\t"+lambda_sum);
 							outputee.newLine();
 						
 			        if(jw_lambdas.get(key).size() != 3) {
@@ -1421,6 +1426,8 @@ public class ComputeSignificance {
 				    }
 
 				    outputee.close();
+
+				    //end of output 
 
 						int err=3;//TODO: 3 ??
 						
