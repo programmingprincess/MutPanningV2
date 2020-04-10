@@ -1395,14 +1395,14 @@ public class ComputeSignificance {
 			
 						outputee.write("position\tlambdas\tsum_lambdas");
 
-						Iterator it = jw_lambdas.entrySet().iterator();
-				    while (it.hasNext()) {
-			        HashMap.Entry pair = (HashMap.Entry)it.next();
-			        String key = pair.getKey();
-			        StringBuilder str_value = new StringBuilder();
+
+						int i = 0;
+						for (Integer key : jw_lambdas.keySet()) {
+						  StringBuilder str_value = new StringBuilder();
 							double lambda_sum = jw_lambdas.get(key).stream()
 						    .mapToDouble(a -> a)
 						    .sum();
+
 
 			        for(int idx=0;idx<jw_lambdas.get(key).size(); idx++) {
 			        	str_value.append(jw_lambdas.get(key).get(idx)+", ");
@@ -1422,8 +1422,9 @@ public class ComputeSignificance {
 			        	System.out.println(key);
 			        	outputee.newLine();
 			        }
-			        it.remove(); // avoids a ConcurrentModificationException
-				    }
+
+
+						}
 
 				    outputee.close();
 
