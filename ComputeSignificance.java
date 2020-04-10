@@ -60,7 +60,7 @@ public class ComputeSignificance {
 	
 	static double[][][] lambda_context_product6_weight=null;
 
-	static HashMap<String, List<double>> jw_lambdas = null; 
+	static HashMap<String, ArrayList<Double>> jw_lambdas = null; 
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
 	static ArrayList<Integer> final_pos=null;
@@ -1234,7 +1234,7 @@ public class ComputeSignificance {
 					ArrayList<int[]> index_gene2=new ArrayList<int[]>();
 					ArrayList<int[]> index_gene_syn2=new ArrayList<int[]>();
 
-					HashMap<String, List<Double>> jw_lambdas = new HashMap<String, ArrayList<Double>>(); // Java 6
+					HashMap<String, ArrayList<Double>> jw_lambdas = new HashMap<String, ArrayList<Double>>(); // Java 6
 
 					// Tried to get nucleotide contexts this way but too complicated...may just do position+hg19
 					// ArrayList<StringBuilder[]> index_gene2_contexts = new ArrayList<StringBuilder>();
@@ -1339,7 +1339,7 @@ public class ComputeSignificance {
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new List<Double>());
+								jw_lambdas.put(key, new ArrayList<Double>());
 								jw_lambdas.get(key).add(x);
 							}
 
@@ -1380,7 +1380,7 @@ public class ComputeSignificance {
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.put(key, new List<Double>());
+								jw_lambdas.put(key, new ArrayList<Double>());
 								jw_lambdas.get(key).add(x);
 							}
 
@@ -1401,7 +1401,7 @@ public class ComputeSignificance {
 			        outputee.write(pair.getKey()+"\t"+Arrays.toString(pair.getValue())+"\t"+sum(pair.getValue()));
 							outputee.newLine();
 						
-			        if(pair.getValue().length != 3) {
+			        if(pair.getValue().size() != 3) {
 			        	System.out.println("Value does not add up at " + pair.getKey());
 			        	System.out.println(Arrays.toString(pair.getValue()));
 			        	outputee.newLine();
