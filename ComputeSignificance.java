@@ -1399,9 +1399,6 @@ public class ComputeSignificance {
 						int i = 0;
 						for (String key : jw_lambdas.keySet()) {
 						  StringBuilder str_value = new StringBuilder();
-							double lambda_sum = jw_lambdas.get(key).stream()
-						    .mapToDouble(a -> a)
-						    .sum();
 
 
 			        for(int idx=0;idx<jw_lambdas.get(key).size(); idx++) {
@@ -1409,12 +1406,11 @@ public class ComputeSignificance {
 			        }
 
 			        System.out.print(key);
-			        System.out.printf("\t" +str_value+"\t");
-			        System.out.printf("%d%n", lambda_sum);
+			        System.out.printf("\t" +str_value+"\n");
 
 
 
-			        outputee.write(key+"\t"+str_value+"\t"+lambda_sum);
+			        outputee.write(key+"\t"+str_value);
 							outputee.newLine();
 						
 			        if(jw_lambdas.get(key).size() != 3) {
