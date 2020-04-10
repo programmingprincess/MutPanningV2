@@ -1397,7 +1397,7 @@ public class ComputeSignificance {
 						Iterator it = jw_lambdas.entrySet().iterator();
 				    while (it.hasNext()) {
 			        HashMap.Entry pair = (HashMap.Entry)it.next();
-			        String key = pair.get(key)
+			        String key = pair.get(key);
 			        System.out.println(key + " = " + Arrays.toString(jw_lambdas.get(key)));
 			        outputee.write(pair.getKey()+"\t"+Arrays.toString(jw_lambdas.get(key))+"\t"+sum(jw_lambdas.get(key)));
 							outputee.newLine();
