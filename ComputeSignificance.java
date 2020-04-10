@@ -1298,7 +1298,7 @@ public class ComputeSignificance {
 						
 					//per entity, i.e., skin 
 					for (int k=0;k<entities.length;k++){
-
+						HashMap<String, ArrayList<Double>> jw_temp_lambdas = new HashMap<String, ArrayList<Double>>();
 
 						//index_gene2: [0] is the position 
 						// 						 [1] refers to subs TYPE change (index for tt1, tt2)
@@ -1345,11 +1345,11 @@ public class ComputeSignificance {
 							
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
-							if (jw_lambdas.get(k).containsKey(key)) {
-								jw_lambdas.get(k).get(key).add(x);
+							if (jw_temp_lambdas.containsKey(key)) {
+								jw_temp_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.get(k).put(key, new ArrayList<Double>());
-								jw_lambdas.get(k).get(key).add(x);
+								jw_temp_lambdas.put(key, new ArrayList<Double>());
+								jw_temp_lambdas.get(key).add(x);
 							}
 
 							// make sure output file matches the number of positions recorded in the loop
@@ -1389,11 +1389,11 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
-							if (jw_lambdas.get(k).containsKey(key)) {
-								jw_lambdas.get(k).get(key).add(x);
+							if (jw_temp_lambdas.containsKey(key)) {
+								jw_temp_lambdas.get(key).add(x);
 							} else {
-								jw_lambdas.get(k).put(key, new ArrayList<Double>());
-								jw_lambdas.get(k).get(key).add(x);
+								jw_temp_lambdas.put(key, new ArrayList<Double>());
+								jw_temp_lambdas.get(key).add(x);
 							}
 
 							pos_counter+=1;
@@ -1472,6 +1472,8 @@ public class ComputeSignificance {
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								
 						} //end else of cov check 
+
+						jw_lambdas.add(jw_temp_lambdas);
 							
 					} //end of entities for loop 					
 					
