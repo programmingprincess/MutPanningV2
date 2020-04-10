@@ -1375,7 +1375,7 @@ public class ComputeSignificance {
 							
 							lambda_count_syn.add(new double[]{x,count2.get(index_gene_syn2.get(jj)[0])[k][index_gene_syn2.get(jj)[1]]});//lambda22.get(index_gene_syn2.get(i)[0])[index_gene_syn2.get(i)[1]]
 
-							String key = chr[c]+"_"+index_gene2.get(jj)[2];
+							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add(x);
