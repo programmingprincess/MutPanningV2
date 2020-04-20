@@ -1507,7 +1507,7 @@ public class ComputeSignificance {
 				for (int k=0;k<entities.length;k++){
 					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
 					BufferedWriter outputee= new BufferedWriter(outtee);
-					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ntotal_lambda\n");
+					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");
 
 					int i = 0;
 					// for every position 
