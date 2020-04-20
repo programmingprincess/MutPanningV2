@@ -1079,6 +1079,8 @@ public class ComputeSignificance {
 
 
 				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 				
 				int nnn=0;
 
@@ -1506,6 +1508,8 @@ public class ComputeSignificance {
 
 				/// jiaqiiiiii
 				// print out lambda values 
+				int syn_missing=0;
+				int nonsyn_missing=0;
 
 				for (int k=0;k<entities.length;k++){
 					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
@@ -1546,12 +1550,23 @@ public class ComputeSignificance {
 
 		        int num_repeats = jw_lambdas.get(k).get(key).size() / 3;
 
-		        for(int idx=0; idx<(jw_lambdas_syn.get(k).get(key).size() / num_repeats); idx++) {
-		        	syn_sum+=jw_lambdas_syn.get(k).get(key).get(idx);
+		        try {
+		        	for(int idx=0; idx<(jw_lambdas_syn.get(k).get(key).size() / num_repeats); idx++) {
+		        		syn_sum+=jw_lambdas_syn.get(k).get(key).get(idx);
+		        	}	
+		        } catch(Exception e) {
+		        	System.out.println(e);
+		        	syn_missing+=1;
 		        }
+		        
 
-		        for(int idx=0; idx<(jw_lambdas_nonsyn.get(k).get(key).size() / num_repeats); idx++) {
-		        	non_syn_sum+=jw_lambdas_nonsyn.get(k).get(key).get(idx);
+		        try {
+							for(int idx=0; idx<(jw_lambdas_nonsyn.get(k).get(key).size() / num_repeats); idx++) {
+		        		non_syn_sum+=jw_lambdas_nonsyn.get(k).get(key).get(idx);	
+		        	}
+		        } catch (Exception e) {
+		        	System.out.println(e);
+		        	nonsyn_missing+=1;
 		        }
 		        
 
@@ -1572,6 +1587,8 @@ public class ComputeSignificance {
 			  	System.out.printf("Pos_counter: %d%n", pos_counter);
 			  }
 			  
+			  System.out.printf("Missing nonsyn: %d%n", nonsyn_missing);
+			  System.out.printf("Missing syn: %d%n", syn_missing);
 				
 			} //end of run(c) try
 			catch(Exception e){
