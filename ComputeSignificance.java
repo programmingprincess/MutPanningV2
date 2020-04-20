@@ -1320,9 +1320,9 @@ public class ComputeSignificance {
 						for (int jj=0;jj<index_gene2.size();jj++){
 							double x=0;
 
-							System.out.printf("Counter: %d%n", jj);
+							// System.out.printf("Counter: %d%n", jj);
 
-							System.out.println("(TYPE) tt2[index_gene2.get(jj)[1]]");
+							// System.out.println("(TYPE) tt2[index_gene2.get(jj)[1]]");
 							//valid...index+=  (weird number)
 							if(lambda2.get(index_gene2.get(jj)[0]).length==1){
 
@@ -1340,7 +1340,7 @@ public class ComputeSignificance {
 							//NOT "valid", so needed to be calculated in update_10_10
 							else{
 								x=lambda2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]];
-								System.out.printf("Unknown: %d%n", index_gene2.get(jj)[1]);
+								// System.out.printf("Unknown: %d%n", index_gene2.get(jj)[1]);
 							}
 
 							//the final lambda values, with position same as final_pos! 
@@ -1370,13 +1370,6 @@ public class ComputeSignificance {
 
 							// make sure output file matches the number of positions recorded in the loop
 							pos_counter+=1;
-
-							System.out.println("(LAMBDA) final_lambda_count: x");
-							System.out.println(x);
-							System.out.println("(POSITION) chr_index_gene2.get(jj)[2]");
-							System.out.println(chr[c]+"_"+index_gene2.get(jj)[2]);
-					
-							System.out.println("\n\n\n");
 
 						} //end of jj index_gene2 loop 
 						Collections.sort(lambda_count,comppp);
@@ -1514,7 +1507,7 @@ public class ComputeSignificance {
 				for (int k=0;k<entities.length;k++){
 					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
 					BufferedWriter outputee= new BufferedWriter(outtee);
-					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ntotal_lambda");
+					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ntotal_lambda\n");
 
 					int i = 0;
 					// for every position 
