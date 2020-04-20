@@ -64,6 +64,8 @@ public class ComputeSignificance {
 	//		Key<String> is chr_pos, and 
 	//		ArrayList<Double> contains 3 lambda values for each possible subs. type
 	static ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = null; 
+	static ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = null; 
+	static ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = null; 
 	static int pos_counter = 0;
 	
 	static ArrayList<StringBuilder[][]> nucl_context=null;
@@ -183,7 +185,7 @@ public class ComputeSignificance {
 		//file_out2=args[0]+"CBASE/CountsRaw/Count";
 		file_count_genes=args[0]+"CBASE/CountsChrwise/Count";
 		
-		file_out_lambda=args[0]+"jw_final_lambdas";
+		file_out_lambda=args[0]+"lambdas_syn_nonsyn";
 		
 		if(!new File(args[0]+"SignificanceRaw/").exists()){
 			new File(args[0]+"SignificanceRaw/").mkdirs();
@@ -1082,6 +1084,8 @@ public class ComputeSignificance {
 
 				for (int k=0;k<entities.length;k++){
 					jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
+					jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
+					jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
 				}
 
 				//for every gene in chromosome?
@@ -1355,6 +1359,13 @@ public class ComputeSignificance {
 								jw_lambdas.get(k).get(key).add(x);
 							}
 
+							if (jw_lambdas_nonsyn.get(k).containsKey(key)) {
+								jw_lambdas_nonsyn.get(k).get(key).add(x);
+							} else {
+								jw_lambdas_nonsyn.get(k).put(key, new ArrayList<Double>());
+								jw_lambdas_nonsyn.get(k).get(key).add(x);
+							}
+
 							// make sure output file matches the number of positions recorded in the loop
 							pos_counter+=1;
 
@@ -1397,6 +1408,13 @@ public class ComputeSignificance {
 							} else {
 								jw_lambdas.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas.get(k).get(key).add(x);
+							}
+
+							if (jw_lambdas_syn.get(k).containsKey(key)) {
+								jw_lambdas_syn.get(k).get(key).add(x);
+							} else {
+								jw_lambdas_syn.get(k).put(key, new ArrayList<Double>());
+								jw_lambdas_syn.get(k).get(key).add(x);
 							}
 
 							pos_counter+=1;
@@ -1487,28 +1505,58 @@ public class ComputeSignificance {
 				
 
 				/// jiaqiiiiii
+				// print out lambda values 
+
 				for (int k=0;k<entities.length;k++){
 					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
 					BufferedWriter outputee= new BufferedWriter(outtee);
-					outputee.write("position\tlambdas\tsum_lambdas\n");
+					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ntotal_lambda");
 
 					int i = 0;
+					// for every position 
+
 					for (String key : jw_lambdas.get(k).keySet()) {
 					  StringBuilder str_value = new StringBuilder();
 
 					  double sum=0;
+					  double non_syn_sum=0;
+					  double syn_sum=0;
 					  
 					  // sometimes positions are counted twice (0.4% of the time)
 		        // in those cases, only sum the first 3. they are identical to the second 3
+
+		        // for every value (out of 3 possible substitutions)
 		        for(int idx=0;idx<jw_lambdas.get(k).get(key).size(); idx++) {
 		        	if (idx < 3) {
 		        		sum+=jw_lambdas.get(k).get(key).get(idx);	
-		        	}
+		        	} 
 		        		
 		        	str_value.append(jw_lambdas.get(k).get(key).get(idx)+", ");	
 		        }
 
-		        outputee.write(key+"\t"+str_value+"\t"+sum);
+		        // get number of repeats for non and syn sums 
+		        // if the position is counted once, then 
+		        //				3 / 3 = 1 
+		        // if the position is counted 3 times, then 
+		        // 				9 / 3 = 3 
+		        // we want to take length of jw_lambdas_syn and divide by num_repeats 
+		        // if jw_lambdas_syn has 2 values, and is counted 3 times, 
+		        // 				6 / 3 = 2 
+		        // so we read teh first two values 
+
+		        int num_repeats = jw_lambdas.get(k).get(key).size() / 3;
+
+		        for(int idx=0; idx<(jw_lambdas_syn.get(k).get(key).size() / num_repeats); idx++) {
+		        	syn_sum+=jw_lambdas_syn.get(k).get(key).get(idx);
+		        }
+
+		        for(int idx=0; idx<(jw_lambdas_nonsyn.get(k).get(key).size() / num_repeats); idx++) {
+		        	non_syn_sum+=jw_lambdas_nonsyn.get(k).get(key).get(idx);
+		        }
+		        
+
+
+		        outputee.write(key+"\t"+syn_sum+"\t"+non_syn_sum+"\t"+sum);
 						outputee.newLine();
 					
 		        if(jw_lambdas.get(k).get(key).size() != 3) {
