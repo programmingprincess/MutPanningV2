@@ -364,8 +364,7 @@ public class ComputeSignificance {
 			// jiaqi added
 
 
-			FileWriter out=new FileWriter(file_out_lambda);
-			BufferedWriter output= new BufferedWriter(out);
+			
 			// output.write("ClusterID");
 			// for (int i=0;i<20;i++){
 			// 	for (int j=0;j<6;j++){
@@ -902,8 +901,11 @@ public class ComputeSignificance {
 					
 				}
 			
-				out=new FileWriter(file_out+entities[k]+".txt");
-				output= new BufferedWriter(out);
+				FileWriter out=new FileWriter(file_out+entities[k]+".txt");
+				BufferedWriter output= new BufferedWriter(out);
+				
+				
+				
 				//SignVector	SignCount	
 				//output.write("Name	TargetSize	TargetSizeSyn	Count	CountSyn	SignVectorSyn	SignCumSyn	SignCompleteSyn	SignSeq	SignDm	SignCum	SignCombined	FDRSyn	FDR");
 				output.write("Name	TargetSize	TargetSizeSyn	Count	CountSyn	SignificanceSyn	FDRSyn	Significance	FDR");
