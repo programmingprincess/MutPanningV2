@@ -1547,8 +1547,9 @@ public class ComputeSignificance {
 		        	for(int idx=0; idx<(jw_lambdas_syn.get(k).get(key).size() / num_repeats); idx++) {
 		        		syn_sum+=jw_lambdas_syn.get(k).get(key).get(idx);
 		        	}	
-		        } catch(Exception e) {
-		        	System.out.println(e);
+		        } catch(Exception e) { 
+		        	// should be a null pointer exception because that position contains no
+		        	// synonymous mutations 
 		        	syn_missing+=1;
 		        }
 		        
@@ -1558,7 +1559,7 @@ public class ComputeSignificance {
 		        		non_syn_sum+=jw_lambdas_nonsyn.get(k).get(key).get(idx);	
 		        	}
 		        } catch (Exception e) {
-		        	System.out.println(e);
+		        	// System.out.println(e);
 		        	nonsyn_missing+=1;
 		        }
 		        
