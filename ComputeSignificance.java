@@ -1138,6 +1138,7 @@ public class ComputeSignificance {
 						int[] label_local=new int[3];
 
 						// if > 3, that means there is AA info 
+						// there are three checks, for each of the 3 possible codons resulting from substitution
 						if(t.length>3){
 							// if REF AA = Mutated AA... then synonymous mut 
 							if(t[3].equals(t[5])){
@@ -1262,12 +1263,16 @@ public class ComputeSignificance {
 						if(coverage2.get(i)>0.5){
 							for (int j=0;j<3;j++){
 
+								// label2 at 1 means nonsynonymous 
+								// check for: label_local[2]=1;//"ns";
 								if(label2.get(i)[j]==1){
 									index_gene.add(new int[]{i,j});
 									//aa_gene.add(amino_acid2.get(i));
 
 									
 								}
+								// label2 at 0 means synonymous 
+								// label_local[0]=0;//"syn";
 								else if(label2.get(i)[j]==0){
 									index_gene_syn.add(new int[]{i,j});
 									//aa_gene_syn.add(amino_acid2.get(i));
@@ -1309,8 +1314,8 @@ public class ComputeSignificance {
 						// 						 [1] refers to subs TYPE change (index for tt1, tt2)
 						// 
 
-						//lambda_count holds all POSSIBLE nonsyn mutations per position (out of 3)
-						//lambda_count_syn holds all possilbe sny mutations 
+						//lambda_count holds all nonsyn mutations per position (out of 3)
+						//lambda_count_syn holds all syn mutations 
 						//TODO: can we add all lambdas per position to get full context value?
  						ArrayList<double[]> lambda_count=new ArrayList<double[]>();
 						for (int jj=0;jj<index_gene2.size();jj++){
