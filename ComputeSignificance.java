@@ -426,12 +426,6 @@ public class ComputeSignificance {
 					weights[i][j]/=sum;
 				}
 			}
-			
-			System.out.println("entities LOLOLOL");
-			System.out.println(Arrays.toString(entities));
-
-			System.out.println("w e i g h t s after processing ");
-			System.out.println(Arrays.toString(weights));
 
 			//add only the counts that are > 0 to the weights index, to save run time
 			weights_index=new ArrayList[weights.length];
@@ -1329,11 +1323,9 @@ public class ComputeSignificance {
 								int iii=(int)(lambda2.get(index_gene2.get(jj)[0])[0][0]);
 								if(nucl2.get(index_gene2.get(jj)[0]).equals("C")||nucl2.get(index_gene2.get(jj)[0]).equals("G")){
 									x=lambda_context_product6_weight[k][tt2[index_gene2.get(jj)[1]]][iii];
-									System.out.println(tt2[index_gene2.get(jj)[1]]);
 								}
 								else {
 									x=lambda_context_product6_weight[k][tt1[index_gene2.get(jj)[1]]][iii];
-									System.out.println(tt1[index_gene2.get(jj)[1]]);
 								}
 							}
 							//calculated!! (product XYZ, has 2x3 array)
