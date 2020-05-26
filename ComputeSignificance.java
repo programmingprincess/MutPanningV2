@@ -651,28 +651,30 @@ public class ComputeSignificance {
 			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 			
-			System.out.println(jw_lambdas_nonsyn.size());
+			// System.out.println(jw_lambdas_nonsyn.size());
 
 			for (int k=0;k<entities.length;k++){
 				jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
 				jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
 				jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
-				System.out.println("Entities list: ");
-				System.out.println(k);
 			}
 
-			System.out.println(jw_lambdas_nonsyn.size());
+			// System.out.println(jw_lambdas_nonsyn.size());
 
-			System.out.println("Entities length: ");
-			System.out.println(entities.length);
+			// System.out.println("Entities length: ");
+			// System.out.println(entities.length);
 			
-			System.out.println("START");
+			// System.out.println("START");
+
+			FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+			BufferedWriter outputee= new BufferedWriter(outtee);
+			outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");
 
 			for (int i=0;i<chr.length;i++){
 				run(i);
 			}
 			
-			
+			outputee.close();
 			
 			for (int k=0;k<entities.length;k++){
 				int count_all=0;
@@ -1374,21 +1376,17 @@ public class ComputeSignificance {
 							System.out.println(k);
 
 							if (jw_lambdas.get(k).containsKey(key)) {
-								System.out.println("checkpoint 3 if ");
 								jw_lambdas.get(k).get(key).add(x);
 							} else {
-								System.out.println("checkpoint 3 else");
 								jw_lambdas.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas.get(k).get(key).add(x);
 							}
 
 							if (jw_lambdas_nonsyn.get(k).containsKey(key)) {
 								jw_lambdas_nonsyn.get(k).get(key).add(x);
-									System.out.println("checkpoint 4 if ");
 							} else {
 								jw_lambdas_nonsyn.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas_nonsyn.get(k).get(key).add(x);
-									System.out.println("checkpoint 4 else ");
 							}
 
 							// make sure output file matches the number of positions recorded in the loop
@@ -1521,9 +1519,6 @@ public class ComputeSignificance {
 				int nonsyn_missing=0;
 
 				for (int k=0;k<entities.length;k++){
-					FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-					BufferedWriter outputee= new BufferedWriter(outtee);
-					outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");
 
 					int i = 0;
 					// for every position 
@@ -1593,7 +1588,7 @@ public class ComputeSignificance {
 		        }
 					}
 
-					outputee.close();
+					// outputee.close();
 			  	System.out.printf("Pos_counter: %d%n", pos_counter);
 			  }
 			  
@@ -1601,6 +1596,7 @@ public class ComputeSignificance {
 			  System.out.printf("Missing syn: %d%n", syn_missing);
 				
 			} //end of run(c) try
+
 			catch(Exception e){
 				StackTraceElement[] aa=e.getStackTrace();
 				for (int i=0;i<aa.length;i++){
