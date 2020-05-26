@@ -113,47 +113,47 @@ public class MutPanning {
 		
 		// jiaqi look here restart pipeline
 
-		// System.out.println("Aligning Maf to Hg19");// - "+chr[i]);
-		// //System.out.println(System.currentTimeMillis());
-		// AlignHG19.main(new String[]{args[0],args[1],args[2],args[3]});//,chr[i]});
+		System.out.println("Aligning Maf to Hg19");// - "+chr[i]);
+		//System.out.println(System.currentTimeMillis());
+		AlignHG19.main(new String[]{args[0],args[1],args[2],args[3]});//,chr[i]});
 		
-		// System.out.println("Determining Count Vectors");
-		// //System.out.println(System.currentTimeMillis());
-		// AffinityCount.main(new String[]{args[0],args[2],args[3]});
-		// AffinityCount_Cosmic.main(new String[]{args[0],args[2],args[3]});
+		System.out.println("Determining Count Vectors");
+		//System.out.println(System.currentTimeMillis());
+		AffinityCount.main(new String[]{args[0],args[2],args[3]});
+		AffinityCount_Cosmic.main(new String[]{args[0],args[2],args[3]});
 		
-		// System.out.println("Clustering for Each Cancer Type");
-		// //System.out.println(System.currentTimeMillis());
-		// ClusteringEntity.main(new String[]{args[0],args[2],args[3]});
+		System.out.println("Clustering for Each Cancer Type");
+		//System.out.println(System.currentTimeMillis());
+		ClusteringEntity.main(new String[]{args[0],args[2],args[3]});
 		
-		// System.out.println("Clustering PanCancer");
-		// //System.out.println(System.currentTimeMillis());
-		// ClusteringPanCancer.main(new String[]{args[0],args[2],args[4],args[5],args[3]});
+		System.out.println("Clustering PanCancer");
+		//System.out.println(System.currentTimeMillis());
+		ClusteringPanCancer.main(new String[]{args[0],args[2],args[4],args[5],args[3]});
 
 		
 		
 		
-		// System.out.println("Count Destructive Mutations");
-		// //System.out.println(System.currentTimeMillis());
-		// CountDestructiveMutations.main(new String[]{args[0],args[1],args[2],args[3]});
+		System.out.println("Count Destructive Mutations");
+		//System.out.println(System.currentTimeMillis());
+		CountDestructiveMutations.main(new String[]{args[0],args[1],args[2],args[3]});
 		
 		
-		// System.out.println("Compute Mutation Rate Entities/Clusters");
-		// //System.out.println(System.currentTimeMillis());
-		// ComputeMutationRateClusters_Entities.main(new String[]{args[0],args[2],args[3]});
+		System.out.println("Compute Mutation Rate Entities/Clusters");
+		//System.out.println(System.currentTimeMillis());
+		ComputeMutationRateClusters_Entities.main(new String[]{args[0],args[2],args[3]});
 			
 		
 		
-		// System.out.println("Reformat files for CBASE");
-		// //System.out.println(System.currentTimeMillis());
-		// // delete permantently ReformatCBASE_Step1.main(new String[]{args[0],args[2],args[3]});
-		// //System.out.println(System.currentTimeMillis());
-		// ReformatCBASE.main(new String[]{args[0],args[1],args[2],args[3]});
+		System.out.println("Reformat files for CBASE");
+		//System.out.println(System.currentTimeMillis());
+		// delete permantently ReformatCBASE_Step1.main(new String[]{args[0],args[2],args[3]});
+		//System.out.println(System.currentTimeMillis());
+		ReformatCBASE.main(new String[]{args[0],args[1],args[2],args[3]});
 
 		
-		// System.out.println("Execute the parameter estimation for CBASE");
-		// //System.out.println(System.currentTimeMillis());
-		// CBASE_Solutions.main(new String[]{args[0],args[2]});
+		System.out.println("Execute the parameter estimation for CBASE");
+		//System.out.println(System.currentTimeMillis());
+		CBASE_Solutions.main(new String[]{args[0],args[2]});
 
 		
 		
