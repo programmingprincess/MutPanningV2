@@ -1103,6 +1103,8 @@ public class ComputeSignificance {
 							ii++;
 						}
 					}
+
+					System.out.println("checkpoint 1");
 					
 					//remove the squence of the previous gene out of the queue
 
@@ -1354,6 +1356,7 @@ public class ComputeSignificance {
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 							
+							System.out.println("checkpoint 2");
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
 							if (jw_lambdas.get(k).containsKey(key)) {
@@ -1465,9 +1468,6 @@ public class ComputeSignificance {
 											}
 											else{
 												genes[c].get(nn).sign_combined_uniform[k]=signREVISED(genes[c].get(nn).count[k],lambda_count,prob_nonsyn_uniform,err);//signREVISED(genes[c].get(nn).count[k],lambda_gene,count_gene,prob_nonsyn,err);//genes[c].get(nn). //err,
-												/*if(entities[k].equals("Thyroid")){
-													System.out.println(genes[c].get(nn).name+"	"+genes[c].get(nn).sign_combined_uniform[k]);
-												}*/
 											}
 											
 										}
@@ -1694,7 +1694,6 @@ public class ComputeSignificance {
 			for (int i=0;i<lambda_count.size();i++){
 				if(lambda_count.get(i)[1]>0){
 					T+=lambda_count.get(i)[1]*Math.log(lambda_count.get(i)[0]);
-					//System.out.println(Math.log(lambda2.get(i)));
 				}
 				if(lambda_count.get(i)[1]>0){
 					T-=log_gamma_int((int)(lambda_count.get(i)[1])+1);
@@ -1702,11 +1701,7 @@ public class ComputeSignificance {
 			}
 			double offset=NN*Math.log((double)(1)/(double)(lambda_count.size()));
 			T+=offset;
-			//System.out.println(T);
-			
-			//System.out.println("T: "+Math.exp(T));
-			
-			//int NN=500;
+
 			
 			Collections.sort(lambda_count,comp0);//sort by 0 according to comp
 			double sum_lambda=0;
@@ -1771,7 +1766,6 @@ public class ComputeSignificance {
 			
 			
 			BinomialDistribution binom=new BinomialDistribution(NN,fraction_high);
-			//System.out.println("SART");
 			for (int k1=0;k1<10000;k1++){//10000
 				int N_high=binom.sample();
 				int[] meta_random=random_collision(N_high,cum_high);
@@ -1789,11 +1783,8 @@ public class ComputeSignificance {
 			
 			
 			for (int k2=0;k2<100000;k2++){//100000
-				
 				s3.add(offset+random_draw(NN,lambda_dist,err,lambda_count));//0 argument only
-			//	System.out.println(s3.get(s3.size()-1));
 			}
-			//System.out.println("END2");
 			Collections.sort(s1);
 			Collections.sort(s3);
 
@@ -1862,7 +1853,6 @@ public class ComputeSignificance {
 			for (int i=0;i<lambda_count.size();i++){
 				if(lambda_count.get(i)[1]>0){
 					T+=lambda_count.get(i)[1]*Math.log(lambda_count.get(i)[0]);
-					//System.out.println(Math.log(lambda2.get(i)));
 				}
 				if(lambda_count.get(i)[1]>0){
 					T-=log_gamma_int((int)(lambda_count.get(i)[1])+1);
@@ -1937,7 +1927,6 @@ public class ComputeSignificance {
 			
 			
 			BinomialDistribution binom=new BinomialDistribution(NN,fraction_high);
-			//System.out.println("SART");
 			for (int k1=0;k1<100;k1++){//
 				int N_high=binom.sample();
 				int[] meta_random=random_collision(N_high,cum_high);
@@ -1950,7 +1939,6 @@ public class ComputeSignificance {
 				}
 				s1.add(-sum1);
 			}
-			//System.out.println("END");
 			for (int k2=0;k2<1000;k2++){//
 				
 				s3.add(offset+random_draw(NN,lambda_dist,err,lambda_count));//0 column
