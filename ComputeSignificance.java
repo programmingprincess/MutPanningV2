@@ -655,6 +655,8 @@ public class ComputeSignificance {
 				jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
 				jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
 				jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
+				System.out.println("Entities list: ");
+				System.out.println(k);
 			}
 			
 			System.out.println("START");
@@ -1359,7 +1361,10 @@ public class ComputeSignificance {
 							System.out.println("checkpoint 2");
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 							System.out.println("checkpoint hmmm");
-							
+
+							System.out.println("Entities list: ");
+							System.out.println(k);
+
 							if (jw_lambdas.get(k).containsKey(key)) {
 								System.out.println("checkpoint 3 if ");
 								jw_lambdas.get(k).get(key).add(x);
