@@ -185,7 +185,7 @@ public class MutPanning {
 		
 		
 		
-		/*
+		
 		System.out.println("Start Filtering of significant genes");
 		System.out.println("Filtering Step 1 - Preparing Blat Queries");
 		//System.out.println(System.currentTimeMillis());
@@ -227,7 +227,7 @@ public class MutPanning {
 		System.out.println("Filtering Step 3 - Filtering out Genes");
 		//System.out.println(System.currentTimeMillis());
 		Filter_Step3.main(new String[]{args[0],args[2],args[3]},entities,compute_uniform);
-		*/
+
 	
 	}
 	
