@@ -1368,6 +1368,9 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
+							System.out.println("Entity Loop: ");
+							System.out.println(entities[k]);
+
 							if (jw_lambdas.get(k).containsKey(key)) {
 								jw_lambdas.get(k).get(key).add((float)x);
 							} else {
