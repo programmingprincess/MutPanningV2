@@ -1518,12 +1518,12 @@ public class ComputeSignificance {
 					FileWriter outtee = null;
 					BufferedWriter outputee = null;
 					if(c==0) {
-						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-						BufferedWriter outputee= new BufferedWriter(outtee);
+						outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+						outputee= new BufferedWriter(outtee);
 						outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
 					} else {
-						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
-						BufferedWriter outputee= new BufferedWriter(outtee);
+						outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
+						outputee= new BufferedWriter(outtee);
 					}
 					
 
