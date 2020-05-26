@@ -658,6 +658,9 @@ public class ComputeSignificance {
 				System.out.println("Entities list: ");
 				System.out.println(k);
 			}
+
+			System.out.println("Entities length: ");
+			System.out.println(entities.length);
 			
 			System.out.println("START");
 
