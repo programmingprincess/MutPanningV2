@@ -1491,92 +1491,6 @@ public class ComputeSignificance {
 								genes[c].get(nn).sign_hotspot_syn[k]=1.0;//hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene_syn,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 								
 						} //end else of cov check 
-
-						// //jiaqiiiiii check new thing here 
-						// FileWriter outtee = null;
-						// BufferedWriter outputee = null;
-						// if(c==0) {
-						// 	outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-						// 	outputee= new BufferedWriter(outtee);
-						// 	outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
-						// } else {
-						// 	outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
-						// 	outputee= new BufferedWriter(outtee);
-						// }
-						
-
-						// int i = 0;
-						// // for every position 
-
-						// for (String key : jw_lambdas.get(k).keySet()) {
-						//   StringBuilder str_value = new StringBuilder();
-
-						//   double sum=0;
-						//   double non_syn_sum=0;
-						//   double syn_sum=0;
-						  
-						//   // sometimes positions are counted twice (0.4% of the time)
-			   //      // in those cases, only sum the first 3. they are identical to the second 3
-
-			   //      // for every value (out of 3 possible substitutions)
-			   //      for(int idx=0;idx<jw_lambdas.get(k).get(key).size(); idx++) {
-			   //      	if (idx < 3) {
-			   //      		sum+=jw_lambdas.get(k).get(key).get(idx);	
-			   //      	} 
-			        		
-			   //      	str_value.append(jw_lambdas.get(k).get(key).get(idx)+", ");	
-			   //      }
-
-			   //      // get number of repeats for non and syn sums 
-			   //      // if the position is counted once, then 
-			   //      //				3 / 3 = 1 
-			   //      // if the position is counted 3 times, then 
-			   //      // 				9 / 3 = 3 
-			   //      // we want to take length of jw_lambdas_syn and divide by num_repeats 
-			   //      // if jw_lambdas_syn has 2 values, and is counted 3 times, 
-			   //      // 				6 / 3 = 2 
-			   //      // so we read teh first two values 
-
-			   //      int num_repeats = jw_lambdas.get(k).get(key).size() / 3;
-
-			   //      try {
-			   //      	for(int idx=0; idx<(jw_lambdas_syn.get(k).get(key).size() / num_repeats); idx++) {
-			   //      		syn_sum+=jw_lambdas_syn.get(k).get(key).get(idx);
-			   //      	}	
-			   //      } catch(Exception e) { 
-			   //      	// should be a null pointer exception because that position contains no
-			   //      	// synonymous mutations 
-			   //      	syn_missing+=1;
-			   //      }
-			        
-
-			   //      try {
-						// 		for(int idx=0; idx<(jw_lambdas_nonsyn.get(k).get(key).size() / num_repeats); idx++) {
-			   //      		non_syn_sum+=jw_lambdas_nonsyn.get(k).get(key).get(idx);	
-			   //      	}
-			   //      } catch (Exception e) {
-			   //      	// System.out.println(e);
-			   //      	nonsyn_missing+=1;
-			   //      }
-			        
-
-
-			   //      outputee.write(key+"\t"+syn_sum+"\t"+non_syn_sum+"\t"+sum);
-						// 	outputee.newLine();
-						
-			   //      if(jw_lambdas.get(k).get(key).size() != 3) {
-			   //      	System.out.println("Err: " + str_value);
-			   //      	System.out.print("Value at " +key + " : size ");
-			   //      	System.out.printf("%d%n", jw_lambdas.get(k).get(key).size());
-			        	
-			   //      	outputee.newLine();
-			   //      }
-						// }
-
-						// outputee.close();
-				  // 	System.out.printf("Pos_counter: %d%n", pos_counter);
-
-				  // 	//jiaqiiiiii end jiaqi 
 							
 					} //end of entities for loop 					
 					
@@ -1594,6 +1508,9 @@ public class ComputeSignificance {
 				int nonsyn_missing=0;
 
 				for (int k=0;k<entities.length;k++){
+					System.out.println("Checkppoint: ");
+					System.out.println(entities[k]);
+					
 					FileWriter outtee = null;
 					BufferedWriter outputee = null;
 					if(c==0) {
