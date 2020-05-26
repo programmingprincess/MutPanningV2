@@ -1375,25 +1375,24 @@ public class ComputeSignificance {
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 							
-							jw_lambdas.get(k);
 
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
 							System.out.println("Entity Loop: ");
 							System.out.println(entities[k]);
 
-							if (jw_lambdas.get(k).containsKey(key)) {
-								jw_lambdas.get(k).get(key).add((float)x);
+							if (jw_lambdas.containsKey(key)) {
+								jw_lambdas.get(key).add((float)x);
 							} else {
-								jw_lambdas.get(k).put(key, new ArrayList<Float>());
-								jw_lambdas.get(k).get(key).add((float)x);
+								jw_lambdas.put(key, new ArrayList<Float>());
+								jw_lambdas.get(key).add((float)x);
 							}
 
-							if (jw_lambdas_nonsyn.get(k).containsKey(key)) {
-								jw_lambdas_nonsyn.get(k).get(key).add((float)x);
+							if (jw_lambdas_nonsyn.containsKey(key)) {
+								jw_lambdas_nonsyn.get(key).add((float)x);
 							} else {
-								jw_lambdas_nonsyn.get(k).put(key, new ArrayList<Float>());
-								jw_lambdas_nonsyn.get(k).get(key).add((float)x);
+								jw_lambdas_nonsyn.put(key, new ArrayList<Float>());
+								jw_lambdas_nonsyn.get(key).add((float)x);
 							}
 
 							// make sure output file matches the number of positions recorded in the loop
@@ -1426,18 +1425,18 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
-							if (jw_lambdas.get(k).containsKey(key)) {
-								jw_lambdas.get(k).get(key).add((float)x);
+							if (jw_lambdas.containsKey(key)) {
+								jw_lambdas.get(key).add((float)x);
 							} else {
-								jw_lambdas.get(k).put(key, new ArrayList<Float>());
-								jw_lambdas.get(k).get(key).add((float)x);
+								jw_lambdas.put(key, new ArrayList<Float>());
+								jw_lambdas.get(key).add((float)x);
 							}
 
-							if (jw_lambdas_syn.get(k).containsKey(key)) {
-								jw_lambdas_syn.get(k).get(key).add((float)x);
+							if (jw_lambdas_syn.containsKey(key)) {
+								jw_lambdas_syn.get(key).add((float)x);
 							} else {
-								jw_lambdas_syn.get(k).put(key, new ArrayList<Float>());
-								jw_lambdas_syn.get(k).get(key).add((float)x);
+								jw_lambdas_syn.put(key, new ArrayList<Float>());
+								jw_lambdas_syn.get(key).add((float)x);
 							}
 
 							pos_counter+=1;
@@ -1453,9 +1452,10 @@ public class ComputeSignificance {
 
 						System.out.println("Checkppoint: ");
 						System.out.println(entities[k]);
+
 						
-						outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
-						outputee= new BufferedWriter(outtee);
+						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
+						BufferedWriter outputee= new BufferedWriter(outtee);
 
 						// int indx = 0;
 						// // for every position 
