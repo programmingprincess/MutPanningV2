@@ -1360,17 +1360,21 @@ public class ComputeSignificance {
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
 							if (jw_lambdas.get(k).containsKey(key)) {
+								System.out.println("checkpoint 3 if ");
 								jw_lambdas.get(k).get(key).add(x);
 							} else {
+								System.out.println("checkpoint 3 else");
 								jw_lambdas.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas.get(k).get(key).add(x);
 							}
 
 							if (jw_lambdas_nonsyn.get(k).containsKey(key)) {
 								jw_lambdas_nonsyn.get(k).get(key).add(x);
+									System.out.println("checkpoint 4 if ");
 							} else {
 								jw_lambdas_nonsyn.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas_nonsyn.get(k).get(key).add(x);
+									System.out.println("checkpoint 4 else ");
 							}
 
 							// make sure output file matches the number of positions recorded in the loop
@@ -1404,15 +1408,19 @@ public class ComputeSignificance {
 							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
 							if (jw_lambdas.get(k).containsKey(key)) {
+									System.out.println("checkpoint 5 if ");
 								jw_lambdas.get(k).get(key).add(x);
 							} else {
+									System.out.println("checkpoint 5 else ");
 								jw_lambdas.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas.get(k).get(key).add(x);
 							}
 
 							if (jw_lambdas_syn.get(k).containsKey(key)) {
+									System.out.println("checkpoint 6 if ");
 								jw_lambdas_syn.get(k).get(key).add(x);
 							} else {
+									System.out.println("checkpoint 6 else ");
 								jw_lambdas_syn.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas_syn.get(k).get(key).add(x);
 							}
