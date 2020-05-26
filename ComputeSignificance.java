@@ -647,17 +647,17 @@ public class ComputeSignificance {
 				}
 			}
 
-			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
-			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
-			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+			// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+			// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+			// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 			
-			// System.out.println(jw_lambdas_nonsyn.size());
+			// // System.out.println(jw_lambdas_nonsyn.size());
 
-			for (int k=0;k<entities.length;k++){
-				jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
-				jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
-				jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
-			}
+			// for (int k=0;k<entities.length;k++){
+			// 	jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
+			// 	jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
+			// 	jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
+			// }
 
 			// System.out.println(jw_lambdas_nonsyn.size());
 
