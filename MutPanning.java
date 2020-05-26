@@ -111,7 +111,8 @@ public class MutPanning {
 		reindex_samples(args[2],args[0]+"SamplesCompleteReindex.txt");
 		args[2]=args[0]+"SamplesCompleteReindex.txt";
 		
-		/*
+		// jiaqi look here restart pipeline
+
 		System.out.println("Aligning Maf to Hg19");// - "+chr[i]);
 		//System.out.println(System.currentTimeMillis());
 		AlignHG19.main(new String[]{args[0],args[1],args[2],args[3]});//,chr[i]});
@@ -154,7 +155,7 @@ public class MutPanning {
 		//System.out.println(System.currentTimeMillis());
 		CBASE_Solutions.main(new String[]{args[0],args[2]});
 
-		*/
+		
 		
 		String[] entities=entities(args[2]);
 		boolean[] compute_uniform=new boolean[entities.length];
