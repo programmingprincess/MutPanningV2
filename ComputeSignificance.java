@@ -1364,12 +1364,7 @@ public class ComputeSignificance {
 							
 							jw_lambdas.get(k);
 
-							System.out.println("checkpoint 2");
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
-							System.out.println("checkpoint hmmm");
-
-							System.out.println("Entities list: ");
-							System.out.println(k);
 
 							if (jw_lambdas.get(k).containsKey(key)) {
 								jw_lambdas.get(k).get(key).add(x);
@@ -1416,19 +1411,15 @@ public class ComputeSignificance {
 							String key = chr[c]+"_"+index_gene_syn2.get(jj)[2];
 
 							if (jw_lambdas.get(k).containsKey(key)) {
-									System.out.println("checkpoint 5 if ");
 								jw_lambdas.get(k).get(key).add(x);
 							} else {
-									System.out.println("checkpoint 5 else ");
 								jw_lambdas.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas.get(k).get(key).add(x);
 							}
 
 							if (jw_lambdas_syn.get(k).containsKey(key)) {
-									System.out.println("checkpoint 6 if ");
 								jw_lambdas_syn.get(k).get(key).add(x);
 							} else {
-									System.out.println("checkpoint 6 else ");
 								jw_lambdas_syn.get(k).put(key, new ArrayList<Double>());
 								jw_lambdas_syn.get(k).get(key).add(x);
 							}
