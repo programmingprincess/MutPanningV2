@@ -646,18 +646,22 @@ public class ComputeSignificance {
 					non_syn_coverage+=genes[i].get(j).cov;
 				}
 			}
+
+			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+			ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 			
-			
-			
+			for (int k=0;k<entities.length;k++){
+				jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
+				jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
+				jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
+			}
 			
 			System.out.println("START");
 
-			// TODO: edit for chr 22 only 
-			// limiting to chr 22 jiaqi 
-			run(21);
-			// for (int i=0;i<chr.length;i++){
-			// 	run(i);
-			// }
+			for (int i=0;i<chr.length;i++){
+				run(i);
+			}
 			
 			
 			
@@ -1074,17 +1078,19 @@ public class ComputeSignificance {
 				BufferedReader input2= new BufferedReader(new InputStreamReader(inn2));
 
 
-				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
-				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
-				ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+				// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+				// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_syn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
+				// ArrayList<HashMap<String, ArrayList<Double>>> jw_lambdas_nonsyn = new ArrayList<HashMap<String, ArrayList<Double>>>(); // Java 6
 				
+				// for (int k=0;k<entities.length;k++){
+				// 	jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
+				// 	jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
+				// 	jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
+				// }
+
 				int nnn=0;
 
-				for (int k=0;k<entities.length;k++){
-					jw_lambdas.add(new HashMap<String, ArrayList<Double>>());
-					jw_lambdas_syn.add(new HashMap<String, ArrayList<Double>>());
-					jw_lambdas_nonsyn.add(new HashMap<String, ArrayList<Double>>());
-				}
+
 
 				//for every gene in chromosome?
 				for (int nn=0;nn<genes[c].size();nn++){
@@ -1118,9 +1124,6 @@ public class ComputeSignificance {
 					
 					while((s=input.readLine())!=null){
 						nnn++;
-						//if(nnn%10000==0){
-						//	System.out.println(nnn+"/"+n+"	"+System.currentTimeMillis());
-						//}
 						
 						//AnnotationChr1, etc
 						//t
@@ -1419,8 +1422,6 @@ public class ComputeSignificance {
 
 						int err=3;//TODO: 3 ??
 						
-						//System.out.println(genes[c].get(nn).name+"	"+genes[c].get(nn).cov+"	"+genes[c].get(nn).cov_syn);
-						
 						if(genes[c].get(nn).cov*genes[c].get(nn).cov_syn==0){
 							//genes[c].get(nn).sign_vector[k]=1;
 							genes[c].get(nn).sign_hotspot[k]=1;//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
@@ -1432,11 +1433,7 @@ public class ComputeSignificance {
 						}
 						
 						else{
-							
-								
-								//System.out.println("Sign "+genes[c].get(nn).name+"	"+entities[k]);
 								//TODO: reevaluate which of these sign values are needed later
-								//System.out.println("size	"+prob_nonsyn.size());
 								genes[c].get(nn).sign_hotspot[k]=hotspot_sign(summarize(count2,lambda2,nucl2,amino_acid2, index_gene,k));//signREVISED(lambda2,count2,genes[c].get(nn).prob_nonsyn,err);//err,
 
 								if(!is_or){
@@ -1457,9 +1454,7 @@ public class ComputeSignificance {
 											int nnnn=0;
 											while(prob>=Math.pow(10, -6)||nnnn<=genes[c].get(nn).count[k]){
 												prob=probability_binom(non_syn_count[k],nnnn,genes[c].get(nn).cov/non_syn_coverage);
-												//if(entities[k].equals("Thyroid")){
-												//	System.out.println(non_syn_count[k]+"	"+nnnn+"	"+genes[c].get(nn).cov/non_syn_coverage);
-												//}
+
 												prob_nonsyn_uniform.add(prob);
 												nnnn++;
 											}
