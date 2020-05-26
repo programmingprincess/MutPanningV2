@@ -1108,8 +1108,6 @@ public class ComputeSignificance {
 							ii++;
 						}
 					}
-
-					System.out.println("checkpoint 1");
 					
 					//remove the squence of the previous gene out of the queue
 
@@ -1361,6 +1359,8 @@ public class ComputeSignificance {
 
 							lambda_count.add(new double[]{x,count2.get(index_gene2.get(jj)[0])[k][index_gene2.get(jj)[1]]});//lambda22.get(index_gene2.get(i)[0])[index_gene2.get(i)[1]]
 							
+							jw_lambdas.get(k);
+
 							System.out.println("checkpoint 2");
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 							System.out.println("checkpoint hmmm");
