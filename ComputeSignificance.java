@@ -666,15 +666,11 @@ public class ComputeSignificance {
 			
 			// System.out.println("START");
 
-			FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-			BufferedWriter outputee= new BufferedWriter(outtee);
-			outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");
+
 
 			for (int i=0;i<chr.length;i++){
 				run(i);
 			}
-			
-			outputee.close();
 			
 			for (int k=0;k<entities.length;k++){
 				int count_all=0;
@@ -1519,6 +1515,17 @@ public class ComputeSignificance {
 				int nonsyn_missing=0;
 
 				for (int k=0;k<entities.length;k++){
+					FileWriter outtee = null;
+					BufferedWriter outputee = null;
+					if(c==0) {
+						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+						BufferedWriter outputee= new BufferedWriter(outtee);
+						outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
+					} else {
+						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
+						BufferedWriter outputee= new BufferedWriter(outtee);
+					}
+					
 
 					int i = 0;
 					// for every position 
@@ -1588,7 +1595,7 @@ public class ComputeSignificance {
 		        }
 					}
 
-					// outputee.close();
+					outputee.close();
 			  	System.out.printf("Pos_counter: %d%n", pos_counter);
 			  }
 			  
