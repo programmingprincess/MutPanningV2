@@ -1358,7 +1358,8 @@ public class ComputeSignificance {
 							
 							System.out.println("checkpoint 2");
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
-
+							System.out.println("checkpoint hmmm");
+							
 							if (jw_lambdas.get(k).containsKey(key)) {
 								System.out.println("checkpoint 3 if ");
 								jw_lambdas.get(k).get(key).add(x);
