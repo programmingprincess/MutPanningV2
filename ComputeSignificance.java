@@ -633,6 +633,15 @@ public class ComputeSignificance {
 
 				mod_C[k]	= (int)(all_models.get(cur_ind)[all_models.get(cur_ind).length-1]);
 				params[k]	= sub(all_models.get(cur_ind),0,all_models.get(cur_ind).length-2);//[:-2];
+
+
+				//jiaqi add for lambdas 
+				FileWriter outtee =new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
+				BufferedWriter outputee = new BufferedWriter(outtee);
+				outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
+				outputee.newLine();
+
+				outputee.close();
 			
 			}
 			
@@ -921,13 +930,7 @@ public class ComputeSignificance {
 				output.newLine();
 
 
-				//jiaqi add for lambdas 
-				FileWriter outtee =new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
-				BufferedWriter outputee = new BufferedWriter(outtee);
-				outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
-				outputee.newLine();
 
-				outputee.close();
 				
 				for (int i=0;i<genes_all.size();i++){//genes_all.get(i).sign_vector+"	"+genes_all.get(i).sign_cbase+"	"+
 					output.write(genes_all.get(i).name+"	"+genes_all.get(i).cov+"	"+genes_all.get(i).cov_syn+"	"+genes_all.get(i).count+"	"+genes_all.get(i).count_syn+"	"+genes_all.get(i).sign_complete_syn+"	"+genes_all.get(i).fdr_syn+"	"+genes_all.get(i).sign_complete+"	"+genes_all.get(i).fdr);
