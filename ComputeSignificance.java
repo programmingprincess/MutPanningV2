@@ -639,7 +639,6 @@ public class ComputeSignificance {
 				FileWriter outtee =new FileWriter(file_out_lambda+"_"+entities[k]+".txt");
 				BufferedWriter outputee = new BufferedWriter(outtee);
 				outputee.write("position\tsynonymous_lambda\tnonsynonymous_lambda\ttotal_lambda\n");	
-				outputee.newLine();
 
 				outputee.close();
 			
