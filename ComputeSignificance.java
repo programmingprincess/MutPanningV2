@@ -1378,9 +1378,6 @@ public class ComputeSignificance {
 
 							String key = chr[c]+"_"+index_gene2.get(jj)[2];
 
-							System.out.println("Entity Loop: ");
-							System.out.println(entities[k]);
-
 							if (jw_lambdas.containsKey(key)) {
 								jw_lambdas.get(key).add((float)x);
 							} else {
@@ -1450,17 +1447,15 @@ public class ComputeSignificance {
 						int syn_missing=0;
 						int nonsyn_missing=0;
 
-						System.out.println("Checkppoint: ");
-						System.out.println(entities[k]);
-
 						
 						FileWriter outtee=new FileWriter(file_out_lambda+"_"+entities[k]+".txt", true);
 						BufferedWriter outputee= new BufferedWriter(outtee);
 
 						// int indx = 0;
 						// // for every position 
-
+						System.out.println("Checkpoint: before print");
 						for (String key : jw_lambdas.keySet()) {
+							System.out.println(key);
 						  StringBuilder str_value = new StringBuilder();
 
 						  float sum=0;
